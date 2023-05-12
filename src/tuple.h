@@ -18,6 +18,10 @@ public:
     bool isPoint();
     
     bool equals(const Tuple& tup);
+
+    Tuple operator+(const Tuple& tup) const;
+
+    Tuple operator-(const Tuple& tup) const;
 };
 
 Tuple point(float x, float y, float z);
