@@ -19,13 +19,24 @@ public:
     
     bool equals(const Tuple& tup);
 
+    Tuple operator-() const;
+
     Tuple operator+(const Tuple& tup) const;
 
     Tuple operator-(const Tuple& tup) const;
 
+    Tuple operator*(float m) const;
+
+    Tuple operator/(float d) const;
+
     bool operator==(const Tuple& tup) const;
 
     bool operator!=(const Tuple& tup) const;
+
+    float magnitude() const;
+
+    Tuple norm() const;
+
 };
 
 Tuple point(float x, float y, float z);
