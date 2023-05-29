@@ -37,6 +37,16 @@ Tuple Tuple::operator-(const Tuple& tup) const{
                       this->w - tup.w);
     return sum;
 }
+bool Tuple::operator==(const Tuple& tup) const{
+    return abs(this->x - tup.x) < EPSILON 
+        && abs(this->y - tup.y) < EPSILON 
+        && abs(this->z - tup.z) < EPSILON 
+        && abs(this->w - tup.w) < EPSILON;
+}
+
+bool Tuple::operator!=(const Tuple& tup) const{
+    return !operator==(tup);
+}
 
 Tuple point(float x, float y, float z){
     return Tuple(x, y, z , 1.0f);

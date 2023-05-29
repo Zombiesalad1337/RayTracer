@@ -22,6 +22,10 @@ public:
     Tuple operator+(const Tuple& tup) const;
 
     Tuple operator-(const Tuple& tup) const;
+
+    bool operator==(const Tuple& tup) const;
+
+    bool operator!=(const Tuple& tup) const;
 };
 
 Tuple point(float x, float y, float z);

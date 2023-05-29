@@ -28,12 +28,14 @@ TEST(Tuple, point){
     rt::Tuple tup = rt::point(4, -4, 3);
     rt::Tuple pt(4, -4, 3, 1);
     EXPECT_EQ(tup.equals(pt), true);
+    EXPECT_EQ(tup == pt, true);
 }
 
 TEST(Tuple, vec){
     rt::Tuple tup = rt::vec(4, -4, 3);
     rt::Tuple v(4, -4, 3, 0);
     EXPECT_EQ(tup.equals(v), true);
+    EXPECT_EQ(tup == v, true);
 }
 
 TEST(Tuple, add){
@@ -42,6 +44,7 @@ TEST(Tuple, add){
     rt::Tuple res = rt::Tuple(1, 1, 6, 1);
     rt::Tuple added = a1 + a2;
     EXPECT_EQ(res.equals(added), true);
+    EXPECT_EQ(res == added, true);
 }
 
 TEST(Tuple, subPointFromPoint){
@@ -50,6 +53,8 @@ TEST(Tuple, subPointFromPoint){
     rt::Tuple res = rt::vec(-2, -4, -6);
     rt::Tuple diff = p1 - p2;
     EXPECT_EQ(res.equals(diff), true);
+    EXPECT_EQ(res == diff, true);
+    EXPECT_NE(res != diff, true);
 }
 
 TEST(Tuple, subVecFromPoint){
@@ -58,6 +63,7 @@ TEST(Tuple, subVecFromPoint){
     rt::Tuple res = rt::point(-2, -4, -6);
     rt::Tuple diff = p1 - p2;
     EXPECT_EQ(res.equals(diff), true);
+    EXPECT_EQ(res == diff, true);
 }
 TEST(Tuple, subVecFromVec){
     rt::Tuple p1 = rt::vec(3, 2, 1);
@@ -65,4 +71,5 @@ TEST(Tuple, subVecFromVec){
     rt::Tuple res = rt::vec(-2, -4, -6);
     rt::Tuple diff = p1 - p2;
     EXPECT_EQ(res.equals(diff), true);
+    EXPECT_EQ(res == diff, true);
 }
