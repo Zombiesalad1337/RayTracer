@@ -119,3 +119,16 @@ TEST(Tuple, normalize){
     EXPECT_EQ(b.norm(), bNorm);
     EXPECT_NEAR(b.norm().magnitude(), 1, EPSILON);
 }
+
+TEST(Tuple, dotProduct){
+    rt::Tuple a = rt::vec(1, 2, 3);
+    rt::Tuple b = rt::vec(2, 3, 4);
+    EXPECT_EQ(dot(a, b), 20);
+}
+
+TEST(Tuple, crossProduct){
+    rt::Tuple a = rt::vec(1, 2, 3);
+    rt::Tuple b = rt::vec(2, 3, 4);
+    EXPECT_EQ(cross(a, b), rt::vec(-1, 2, -1));
+    EXPECT_EQ(cross(b, a), rt::vec(1, -2, 1));
+}

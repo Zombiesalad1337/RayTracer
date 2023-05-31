@@ -41,5 +41,7 @@ public:
 
 Tuple point(float x, float y, float z);
 Tuple vec(float x, float y, float z);
+float dot(const Tuple& a, const Tuple& b);
+Tuple cross(const Tuple& a, const Tuple& b);
 
 }// namespace rt
