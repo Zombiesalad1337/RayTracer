@@ -2,19 +2,36 @@ add_subdirectory(/usr/src/gtest/ ${EXECUTABLE_OUTPUT_PATH}/gtest)
 
 set(TEST_BINARY ${PROJECT_NAME}_test)
 
-add_executable(${TEST_BINARY} tuple_test.cpp)
+add_executable(tuple_test_exec tuple_test.cpp)
+add_executable(vec_test_exec vec_test.cpp)
 
-add_library(TEST_BINARY tuple_test.cpp)
+add_library(tuple_test tuple_test.cpp)
+add_library(vec_test vec_test.cpp)
 
-target_include_directories(TEST_BINARY PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(tuple_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(vec_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 
-target_link_libraries(${TEST_BINARY}
+target_link_libraries(tuple_test_exec
                         tuple
+                        vec
+                        point
+                        gtest gtest_main
+)
+
+target_link_libraries(vec_test_exec
+                        tuple
+                        vec
+                        point
                         gtest gtest_main
 )
 
 add_test(
-    NAME ${TEST_BINARY}
-    COMMAND ${EXECUTABLE_OUTPUT_PATH}/${TEST_BINARY}
+    NAME tuple_test_exec
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/tuple_test_exec
+    )
+
+add_test(
+    NAME vec_test_exec
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/vec_test_exec
     )

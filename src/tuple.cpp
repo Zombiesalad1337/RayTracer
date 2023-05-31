@@ -65,38 +65,9 @@ bool Tuple::operator!=(const Tuple& tup) const{
     return !operator==(tup);
 }
 
-float Tuple::magnitude() const{
-    return sqrt(this->x * this->x + 
-                this->y * this->y + 
-                this->z * this->z);
-}
-
-//TODO: Handle for Zero Vector (magnitude 0)
-Tuple Tuple::norm() const{
-    return *this / this->magnitude();  
-}
 
 
-Tuple point(float x, float y, float z){
-    return Tuple(x, y, z , 1.0f);
-}
 
-Tuple vec(float x, float y, float z){
-    return Tuple(x, y, z, 0.0f);
-}
-
-//TODO: w belongs in dot? no sense of w in dot
-float dot(const Tuple& a, const Tuple& b){
-    return a.x * b.x +
-           a.y * b.y +
-           a.z * b.z;
-}
-
-Tuple cross(const Tuple& a, const Tuple& b){
-    return vec(a.y * b.z - a.z * b.y,
-               a.z * b.x - a.x * b.z,
-               a.x * b.y - a.y * b.x);
-}
 
 } //namespace rt
 
