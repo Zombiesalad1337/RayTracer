@@ -1,0 +1,14 @@
+C++
+1. Vector is just a wrapper over dynamic arrays.
+
+2. If a derived class use the same name as a function of base class, then base class functions of same name will not be visible, irrespective of their arguments or return value. If you redefine one, then you need to redefine all of base class functions to be able to use them.
+
+
+3. reinterpret cast
+
+Doubts:
+
+1. Color(Tuple&% t) - Rule of all or nothing applies here as per error log. WHY?
+
+2. Why copy/move assignment returns refernece? - Debug with stdout to understand flow in case if return value value and is not reference.
+

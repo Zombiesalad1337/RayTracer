@@ -7,7 +7,7 @@ namespace rt{
 class Point : public Tuple{
 public:
     Point(float x, float y, float z);
-    Point(const Tuple& tup);
+    Point(Tuple&& tup);
 };
 
 } //namespace rt

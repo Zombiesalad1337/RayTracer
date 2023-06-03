@@ -4,7 +4,7 @@
 namespace rt{
 
 Vec::Vec(float x, float y, float z) : Tuple(x, y, z, 0.0f) {};
-Vec::Vec(const Tuple& tup) : Tuple(tup) {};
+Vec::Vec(Tuple&& tup) : Tuple(tup) {};
 
 float Vec::magnitude() const{
     return sqrt(this->x * this->x + 

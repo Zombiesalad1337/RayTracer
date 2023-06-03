@@ -7,7 +7,7 @@ namespace rt{
 class Vec : public Tuple{
 public:
     Vec(float x, float y, float z);
-    Vec(const Tuple& tup);
+    Vec(Tuple&& tup);
     float magnitude() const;
     Vec norm() const;
 };
