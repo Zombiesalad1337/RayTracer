@@ -9,8 +9,12 @@
 namespace rt{
 
 Canvas::Canvas(int width, int height) : width(width), height(height), canvas(width){
+    rt::Color black;
     for (int i = 0; i < width; ++i){
         canvas[i].reserve(height);
+        //for(int j = 0; j < height; ++j){
+            //canvas[i][j] = black;
+        //}
     }
 }
 
@@ -45,8 +49,9 @@ void Canvas::writePPM(const std::string& filename) const{
     out.write(header.c_str(), header.length());
     
     //70 chars/line limit? why the fuck would char limit matter in a binary file
-    for (int i = 0; i < this->width; ++i){
-        for (int j = 0; j < this->height; ++j){
+    //SCANLINES WRITTEN IN ROW FIRST ORDER
+    for (int j = 0; j < this->height; ++j){
+        for (int i = 0; i < this->width; ++i){
             const rt::Color& c = this->canvas[i][j]; 
             std::vector<int> colors = this->scaleColor(c);
             for (int i : colors){

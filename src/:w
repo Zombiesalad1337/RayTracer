@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+#include "projectile.h"
+#include "canvas.h"
+
+int main(){
+    Projectile p = Projectile(rt::Point(0,0,0), rt::Vec(40, 30, 0));
+    Environment e = Environment(rt::Vec(0, -9.8, 0), rt::Vec(0, 0, 0));
+    rt::Canvas canvas(1920, 1080);
+
+    std::vector<std::pair<float, float>> positions;
+    float tick_interval = 0.001;
+    float time = 0;
+    while (p.position.y >= 0){
+        //std::cout << "x: " << p.position.x << ", y: " << p.position.y << ", time: " << time << std::endl;
+        positions.emplace_back(std::make_pair(p.position.x, p.position.y));
+        p = tick(p, e, tick_interval);
+        time += tick_interval;
+    }
+
+    for (int i = 0; i < positions.size(); ++i){
+        std::cout << "x: " << positions[i].first << ", y: " << positions[i].second << std::endl;
+    }
+    return 0;
+}
+
+
