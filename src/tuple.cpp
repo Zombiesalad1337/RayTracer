@@ -15,6 +15,7 @@ bool Tuple::isPoint(){
 }
 //abs(x1 - x2) < EPSILON not a function due to additional overhead.
 //TODO: make that inline
+//I guess inline is not possible because of inheritance, both point and vec can call equals
 bool Tuple::equals(const Tuple& tup){
     return abs(this->x - tup.x) < EPSILON 
         && abs(this->y - tup.y) < EPSILON 
@@ -28,6 +29,11 @@ Tuple Tuple::operator-() const{
 }
 
 //TODO: No point of w here as no point in multiplying a point by a scalar
+//But tuple constructor needs 4 params
+//For vector shouldn't be a problem since 0*m = 0
+//For point, maybe a problem, but we aren't using runtime polymorphism, so we know
+//the type when multiplying, and we know that there's no sense in multiplying a point
+//by a scalar.
 Tuple Tuple::operator*(float m) const{
     Tuple multiplied = Tuple(this->x * m, this->y * m, this->z * m, this->w * m);
     return multiplied;

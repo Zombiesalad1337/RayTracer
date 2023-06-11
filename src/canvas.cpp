@@ -9,20 +9,24 @@
 namespace rt{
 
 Canvas::Canvas(int width, int height) : width(width), height(height), canvas(width){
-    rt::Color black;
     for (int i = 0; i < width; ++i){
         canvas[i].reserve(height);
-        //for(int j = 0; j < height; ++j){
-            //canvas[i][j] = black;
-        //}
     }
 }
 
 Color Canvas::getPixel(int x, int y) const{
+    //TODO: Do I need to handle such exception?
+    //Not handling it atm since it would help discover underlying bugs
+    if (x >= width || y >= height){
+        throw std::out_of_range("Canvas getPixel: indices out of range: width = " + std::to_string(width) + ", height = " + std::to_string(height) + ", x = " + std::to_string(x) + ", y = " + std::to_string(y));
+    }
     return canvas[x][y];
 }
 
 void Canvas::setPixel(int x, int y, const Color& c){
+    if (x >= width || y >= height){
+        throw std::out_of_range("Canvas setPixel: indices out of range: width = " + std::to_string(width) + ", height = " + std::to_string(height) + ", x = " + std::to_string(x) + ", y = " + std::to_string(y));
+    }
     canvas[x][y] = c;
 }
 
