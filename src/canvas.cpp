@@ -15,10 +15,18 @@ Canvas::Canvas(int width, int height) : width(width), height(height), canvas(wid
 }
 
 Color Canvas::getPixel(int x, int y) const{
+    //TODO: Do I need to handle such exception?
+    //Not handling it atm since it would help discover underlying bugs
+    if (x >= width || y >= height){
+        throw std::out_of_range("Canvas getPixel: indices out of range: width = " + std::to_string(width) + ", height = " + std::to_string(height) + ", x = " + std::to_string(x) + ", y = " + std::to_string(y));
+    }
     return canvas[x][y];
 }
 
 void Canvas::setPixel(int x, int y, const Color& c){
+    if (x >= width || y >= height){
+        throw std::out_of_range("Canvas setPixel: indices out of range: width = " + std::to_string(width) + ", height = " + std::to_string(height) + ", x = " + std::to_string(x) + ", y = " + std::to_string(y));
+    }
     canvas[x][y] = c;
 }
 
@@ -45,8 +53,9 @@ void Canvas::writePPM(const std::string& filename) const{
     out.write(header.c_str(), header.length());
     
     //70 chars/line limit? why the fuck would char limit matter in a binary file
-    for (int i = 0; i < this->width; ++i){
-        for (int j = 0; j < this->height; ++j){
+    //SCANLINES WRITTEN IN ROW FIRST ORDER
+    for (int j = 0; j < this->height; ++j){
+        for (int i = 0; i < this->width; ++i){
             const rt::Color& c = this->canvas[i][j]; 
             std::vector<int> colors = this->scaleColor(c);
             for (int i : colors){

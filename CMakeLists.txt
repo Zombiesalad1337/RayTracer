@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
 project(RayTracerChallenge)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12 -L /usr/lib/gcc/x86_64-linux-gnu/12 -Wall -Wextra -lstdc++fs -std=c++17")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
@@ -24,6 +28,3 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -lstdc++fs")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
