@@ -19,6 +19,8 @@ Vec Vec::norm() const{
 }
 
 //TODO: w belongs in dot? no sense of w in dot
+//
+//TODO: can be a static func inside vec class
 float dot(const Vec& a, const Vec& b){
     return a.x * b.x +
            a.y * b.y +
