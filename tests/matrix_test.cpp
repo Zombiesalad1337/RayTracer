@@ -54,6 +54,76 @@ TEST(Matrix, comparison2){
     EXPECT_FALSE(m == n);
 }
 
+TEST(Matrix, multiplyMat){
+    std::vector<std::vector<float>> vec = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 8, 7, 6}, {5, 4, 3, 2}};
+    std::vector<std::vector<float>> vec2 = {{-2, 1, 2, 3}, {3, 2, 1, -1}, {4, 3, 6, 5}, {1, 2, 7, 8}};
+    std::vector<std::vector<float>> vec3 = {{20, 22, 50, 48}, {44, 54, 114, 108}, {40, 58, 110, 102}, {16, 26, 46, 42}};
+    rt::Matrix m(vec);
+    rt::Matrix n(vec2);
+    rt::Matrix expected(vec3);
+    rt::Matrix result = m * n;
+
+    EXPECT_TRUE(result == expected);
+}
+
+TEST(Matrix, multiplyTup){
+    std::vector<std::vector<float>> vec = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
+    rt::Matrix mat(vec);
+    rt::Tuple tup(1.0f, 2.0f, 3.0f, 1.0f);
+    rt::Tuple expected(18.0f, 24.0f, 33.0f, 1.0f);
+    rt::Tuple result = mat * tup;
+
+    EXPECT_TRUE(result == expected);
+
+}
+//TODO: DEBUG: passing for 24.5f
+TEST(Matrix, multiplyTupSHOULDFAIL){
+    std::vector<std::vector<float>> vec = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
+    rt::Matrix mat(vec);
+    rt::Tuple tup(1.0f, 2.0f, 3.0f, 1.0f);
+    rt::Tuple expected(18.0f, 24.5f, 33.0f, 1.0f);
+    rt::Tuple result = mat * tup;
+    std::cout << "XXXXXXXXXx " << result.x << " " << result.y << " " << result.z << " " << result.w << std::endl;
+ 
+    EXPECT_TRUE(result == expected);
+
+}
+
+TEST(Matrix, multiplyMatIdentity){
+    std::vector<std::vector<float>> vec = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
+    std::vector<std::vector<float>> vec2 = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+    rt::Matrix mat(vec);
+    rt::Matrix identity(vec2);
+    rt::Matrix mul = mat * identity;
+
+    EXPECT_EQ(mat, mul);
+}
+
+TEST(Matrix, multiplyTupIdentity){
+    rt::Tuple tup(1.0f, 2.0f, 3.0f, 4.0f);
+    std::vector<std::vector<float>> vec2 = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+    rt::Matrix identity(vec2);
+    rt::Tuple res = identity * tup;
+
+    EXPECT_EQ(tup, res);
+}
+
+
+TEST(Matrix, transposeMat){
+    std::vector<std::vector<float>> vec = {{0, 9, 3, 0}, {9, 8, 0, 8}, {1, 8, 5, 3}, {0, 0, 5, 8}};
+    std::vector<std::vector<float>> vec2 = {{0, 9, 1, 0}, {9, 8, 8, 0}, {3, 0, 5, 5}, {0, 8, 3, 8}};
+    rt::Matrix mat(vec);
+    rt::Matrix expected(vec2);
+    rt::Matrix result = mat.transpose(); 
+    EXPECT_EQ(expected, result);
+}
+
+TEST(Matrix, transposeIdentity){
+    std::vector<std::vector<float>> vec = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+    rt::Matrix identity(vec);
+    rt::Matrix transpose = identity.transpose(); 
+    EXPECT_EQ(identity, transpose);
+}
 
 
 

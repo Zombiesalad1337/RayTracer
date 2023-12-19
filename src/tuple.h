@@ -12,6 +12,7 @@ public:
     float w;
 
     Tuple(float x, float y, float z, float w);
+    
 
     bool isVec();
 

@@ -15,6 +15,9 @@ public:
     float get(int x, int y);
     void set(int x, int y, float z);
     bool operator==(const Matrix& mat) const;
+    Matrix operator*(const Matrix& mat) const;
+    Tuple operator*(const Tuple& tup) const;
+    Matrix transpose() const;
 
 
 private:
