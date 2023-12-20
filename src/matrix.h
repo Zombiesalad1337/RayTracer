@@ -18,6 +18,8 @@ public:
     Matrix operator*(const Matrix& mat) const;
     Tuple operator*(const Tuple& tup) const;
     Matrix transpose() const;
+    float cofactor(int row, int col) const;
+    float det() const;
 
 
 private:

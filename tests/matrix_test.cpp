@@ -125,5 +125,45 @@ TEST(Matrix, transposeIdentity){
     EXPECT_EQ(identity, transpose);
 }
 
+TEST(Matrix, cofactor3by3){
+    std::vector<std::vector<float>> vec = {
+        {3, 5, 0},
+        {2, -1, -7},
+        {6, -1, 5}
+    };
+    rt::Matrix mat(vec);
+    EXPECT_EQ(mat.cofactor(0, 0), -12);
+    EXPECT_EQ(mat.cofactor(1, 0), -25);
+}
+
+TEST(Matrix, determinant3x3){
+    std::vector<std::vector<float>> vec = {
+        {1, 2, 6},
+        {-5, 8, -4},
+        {2, 6, 4}
+    };
+    rt::Matrix mat(vec);
+    EXPECT_EQ(mat.cofactor(0, 0), 56);
+    EXPECT_EQ(mat.cofactor(0, 1), 12);
+    EXPECT_EQ(mat.cofactor(0, 2), -46);
+    EXPECT_EQ(mat.det(), -196);
+}
+
+TEST(Matrix, determinant4x4){
+    std::vector<std::vector<float>> vec = {
+        {-2, -8, 3, 5},
+        {-3, 1, 7, 3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}
+    };
+    rt::Matrix mat(vec);
+    EXPECT_EQ(mat.cofactor(0, 0), 690);
+    EXPECT_EQ(mat.cofactor(0, 1), 447);
+    EXPECT_EQ(mat.cofactor(0, 2), 210);
+    EXPECT_EQ(mat.cofactor(0, 3), 51);
+    EXPECT_EQ(mat.det(), -4071);
+}
+
+
 
 

@@ -100,4 +100,152 @@ Matrix Matrix::transpose() const{
     return m;
 }
 
-}//namespace rt
+float Matrix::cofactor(int row, int col) const{
+    float c = 0.0f;
+    int matNum = 0;
+    switch (this->size) {
+        case 3:
+            matNum = row * 3 + col; 
+            switch (matNum){
+                case 0:
+                    c = this->data[1][1] * this->data[2][2] - this->data[1][2] * this->data[2][1]; 
+                    break;
+                case 1:
+                    c = this->data[1][0] * this->data[2][2] - this->data[2][0] * this->data[1][2]; 
+                    c = -c;
+                    break;
+                case 2:
+                    c = this->data[1][0] * this->data[2][1] - this->data[2][0] * this->data[1][1]; 
+                    break;
+                case 3:
+                    c = this->data[0][1] * this->data[2][2] - this->data[2][1] * this->data[0][2]; 
+                    c = -c;
+                    break;
+                case 4:
+                    c = this->data[0][0] * this->data[2][0] - this->data[1][2] * this->data[0][2]; 
+                    break;
+                case 5:
+                    c = this->data[0][0] * this->data[2][1] - this->data[2][0] * this->data[0][1]; 
+                    c = -c;
+                    break;
+                case 6:
+                    c = this->data[0][1] * this->data[1][2] - this->data[1][1] * this->data[0][2]; 
+                    break;
+                case 7:
+                    c = this->data[0][0] * this->data[1][2] - this->data[1][0] * this->data[0][2]; 
+                    c = -c;
+                    break;
+                case 8:
+                    c = this->data[0][0] * this->data[1][1] - this->data[1][0] * this->data[0][1]; 
+                    break;
+                default:
+                    break;
+            }
+            break;
+
+        case 4:
+            matNum = row * 4 + col;
+            switch (matNum) {
+                case 0:
+                    c = this->data[1][1] * (this->data[2][2] * this->data[3][3] - this->data[2][3] * this->data[3][2]) -
+                        this->data[1][2] * (this->data[2][1] * this->data[3][3] - this->data[2][3] * this->data[3][1]) +
+                        this->data[1][3] * (this->data[2][1] * this->data[3][2] - this->data[2][2] * this->data[3][1]);
+                    break;
+                case 1:
+                    c = -this->data[1][0] * (this->data[2][2] * this->data[3][3] - this->data[2][3] * this->data[3][2]) +
+                        this->data[1][2] * (this->data[2][0] * this->data[3][3] - this->data[2][3] * this->data[3][0]) -
+                        this->data[1][3] * (this->data[2][0] * this->data[3][2] - this->data[2][2] * this->data[3][0]);
+                    break;
+                case 2:
+                    c = this->data[1][0] * (this->data[2][1] * this->data[3][3] - this->data[2][3] * this->data[3][1]) -
+                        this->data[1][1] * (this->data[2][0] * this->data[3][3] - this->data[2][3] * this->data[3][0]) +
+                        this->data[1][3] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]);
+                    break;
+                case 3:
+                    c = -this->data[1][0] * (this->data[2][1] * this->data[3][2] - this->data[2][2] * this->data[3][1]) +
+                        this->data[1][1] * (this->data[2][0] * this->data[3][2] - this->data[2][2] * this->data[3][0]) -
+                        this->data[1][2] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]);
+                    break;
+                case 4:
+                    c = -this->data[0][1] * (this->data[2][2] * this->data[3][3] - this->data[2][3] * this->data[3][2]) +
+                        this->data[0][2] * (this->data[2][1] * this->data[3][3] - this->data[2][3] * this->data[3][1]) -
+                        this->data[0][3] * (this->data[2][1] * this->data[3][2] - this->data[2][2] * this->data[3][1]);
+                    break;
+                case 5:
+                    c = this->data[0][0] * (this->data[2][2] * this->data[3][3] - this->data[2][3] * this->data[3][2]) -
+                        this->data[0][2] * (this->data[2][0] * this->data[3][3] - this->data[2][3] * this->data[3][0]) +
+                        this->data[0][3] * (this->data[2][0] * this->data[3][2] - this->data[2][2] * this->data[3][0]);
+                    break;
+                case 6:
+                    c = -this->data[0][0] * (this->data[2][1] * this->data[3][3] - this->data[2][3] * this->data[3][1]) +
+                        this->data[0][1] * (this->data[2][0] * this->data[3][3] - this->data[2][3] * this->data[3][0]) -
+                        this->data[0][3] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]);
+                    break;
+                case 7:
+                    c = this->data[0][0] * (this->data[2][1] * this->data[3][2] - this->data[2][2] * this->data[3][1]) -
+                        this->data[0][1] * (this->data[2][0] * this->data[3][2] - this->data[2][2] * this->data[3][0]) +
+                        this->data[0][2] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]);
+                    break;
+                case 8:
+                    c = this->data[0][1] * (this->data[1][2] * this->data[3][3] - this->data[1][3] * this->data[3][2]) -
+                        this->data[0][2] * (this->data[1][1] * this->data[3][3] - this->data[1][3] * this->data[3][1]) +
+                        this->data[0][3] * (this->data[1][1] * this->data[3][2] - this->data[1][2] * this->data[3][1]);
+                    break;
+                case 9:
+                    c = -this->data[0][0] * (this->data[1][2] * this->data[3][3] - this->data[1][3] * this->data[3][2]) +
+                        this->data[0][2] * (this->data[1][0] * this->data[3][3] - this->data[1][3] * this->data[3][0]) -
+                        this->data[0][3] * (this->data[1][0] * this->data[3][2] - this->data[1][2] * this->data[3][0]);
+                    break;
+                case 10:
+                    c = this->data[0][0] * (this->data[1][1] * this->data[3][3] - this->data[1][3] * this->data[3][1]) -
+                        this->data[0][1] * (this->data[1][0] * this->data[3][3] - this->data[1][3] * this->data[3][0]) +
+                        this->data[0][3] * (this->data[1][0] * this->data[3][1] - this->data[1][1] * this->data[3][0]);
+                    break;
+                case 11:
+                    c = -this->data[0][0] * (this->data[1][1] * this->data[3][2] - this->data[1][2] * this->data[3][1]) +
+                        this->data[0][1] * (this->data[1][0] * this->data[3][2] - this->data[1][2] * this->data[3][0]) -
+                        this->data[0][2] * (this->data[1][0] * this->data[3][1] - this->data[1][1] * this->data[3][0]);
+                    break;
+                case 12:
+                    c = -this->data[0][1] * (this->data[1][2] * this->data[2][3] - this->data[1][3] * this->data[2][2]) +
+                        this->data[0][2] * (this->data[1][1] * this->data[2][3] - this->data[1][3] * this->data[2][1]) -
+                        this->data[0][3] * (this->data[1][1] * this->data[2][2] - this->data[1][2] * this->data[2][1]);
+                    break;
+                case 13:
+                    c = this->data[0][0] * (this->data[1][2] * this->data[2][3] - this->data[1][3] * this->data[2][2]) -
+                        this->data[0][2] * (this->data[1][0] * this->data[2][3] - this->data[1][3] * this->data[2][0]) +
+                        this->data[0][3] * (this->data[1][0] * this->data[2][2] - this->data[1][2] * this->data[2][0]);
+                    break;
+                case 14:
+                    c = -this->data[0][0] * (this->data[1][1] * this->data[2][3] - this->data[1][3] * this->data[2][1]) +
+                        this->data[0][1] * (this->data[1][0] * this->data[2][3] - this->data[1][3] * this->data[2][0]) -
+                        this->data[0][3] * (this->data[1][0] * this->data[2][1] - this->data[1][1] * this->data[2][0]);
+                    break;
+                case 15:
+                    c = this->data[0][0] * (this->data[1][1] * this->data[2][2] - this->data[1][2] * this->data[2][1]) -
+                        this->data[0][1] * (this->data[1][0] * this->data[2][2] - this->data[1][2] * this->data[2][0]) +
+                        this->data[0][2] * (this->data[1][0] * this->data[2][1] - this->data[1][1] * this->data[2][0]);
+                    break;
+                default:
+                    break;
+            }
+    }
+
+    return c;
+}
+float Matrix::det() const{
+    float det = 0.0f; 
+    if (this->size == 2){
+        det = this->data[0][0] * this->data[1][1] - this->data[0][1] * this->data[1][0];
+    }
+    else{
+        for (int j = 0; j < this->size; ++j){
+            det += this->data[0][j] * cofactor(0, j);
+        }
+    }
+    return det;
+}
+
+}
+//namespace rt
+
