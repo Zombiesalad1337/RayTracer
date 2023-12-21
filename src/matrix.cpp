@@ -1,12 +1,12 @@
 #include <iostream>
+#include <cmath>
 #include "matrix.h"
 
 
 namespace rt{
 
 Matrix::Matrix(int size){
-    this->size = size;
-    data = new float*[size];    
+    this->size = size; data = new float*[size];    
     for (int i = 0; i < size; ++i){
         data[i] = new float[size];
     }
@@ -28,7 +28,7 @@ Matrix::Matrix(const std::vector<std::vector<float>>& vec){
 }
 
 Matrix::~Matrix(){
-    for (int i = 0; i < size; ++i){
+    for (int i = 0; i < this->size; ++i){
         delete[] data[i];
     }
     delete[] data;
@@ -57,7 +57,7 @@ bool Matrix::operator==(const Matrix& mat) const{
     }
     for (int i = 0; i < size; ++i){
         for (int j = 0; j < size; ++j){
-            if (abs(data[i][j] - mat.data[i][j]) > EPSILON){
+            if (std::fabs(data[i][j] - mat.data[i][j]) > EPSILON){
                 return false;
             }
         }
@@ -159,8 +159,7 @@ float Matrix::cofactor(int row, int col) const{
                 case 2:
                     c = this->data[1][0] * (this->data[2][1] * this->data[3][3] - this->data[2][3] * this->data[3][1]) -
                         this->data[1][1] * (this->data[2][0] * this->data[3][3] - this->data[2][3] * this->data[3][0]) +
-                        this->data[1][3] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]);
-                    break;
+                        this->data[1][3] * (this->data[2][0] * this->data[3][1] - this->data[2][1] * this->data[3][0]); break;
                 case 3:
                     c = -this->data[1][0] * (this->data[2][1] * this->data[3][2] - this->data[2][2] * this->data[3][1]) +
                         this->data[1][1] * (this->data[2][0] * this->data[3][2] - this->data[2][2] * this->data[3][0]) -
@@ -245,6 +244,78 @@ float Matrix::det() const{
     }
     return det;
 }
+
+bool Matrix::invertible() const{
+    return det() != 0;
+}
+
+Matrix Matrix::inverse() const{
+    int determinant = det();
+    //TODO: Throw expection instead
+    if (determinant == 0){
+        std::cerr << "MATRIX NON-INVERTIBLE" << std::endl;
+        return 0;
+    }
+    Matrix m(this->size);
+    
+    for (int i = 0; i < this->size; ++i){
+        for (int j = 0; j < this->size; ++j){
+            m.data[j][i] = cofactor(i, j) / determinant;
+        }
+    }
+    return m;
+}
+
+void Matrix::print() const{
+    for (int i = 0; i < this->size; ++i){
+        for (int j = 0; j < this->size; ++j){
+            std::cout << this->data[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+Matrix::Matrix(const Matrix& other) : size(other.size) {
+    data = new float*[size];
+    for (int i = 0; i < size; ++i) {
+        data[i] = new float[size];
+        std::copy(other.data[i], other.data[i] + size, data[i]);
+    }
+}
+
+Matrix::Matrix(Matrix&& other) noexcept : size(0), data(nullptr) {
+    swap(*this, other);
+}
+
+Matrix& Matrix::operator=(const Matrix& other) {
+    if (this != &other) {
+        for (int i = 0; i < size; ++i) {
+            delete[] data[i];
+        }
+        delete[] data;
+
+        size = other.size;
+        data = new float*[size];
+        for (int i = 0; i < size; ++i) {
+            data[i] = new float[size];
+            std::copy(other.data[i], other.data[i] + size, data[i]);
+        }
+    }
+    return *this;
+}
+
+Matrix& Matrix::operator=(Matrix&& other) noexcept {
+    swap(*this, other);
+    return *this;
+}
+
+
+void swap(Matrix& first, Matrix& second) noexcept {
+    using std::swap;
+    swap(first.size, second.size);
+    swap(first.data, second.data);
+}
+
 
 }
 //namespace rt

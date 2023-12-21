@@ -20,6 +20,14 @@ public:
     Matrix transpose() const;
     float cofactor(int row, int col) const;
     float det() const;
+    bool invertible() const;
+    Matrix inverse() const;
+    void print() const;
+    Matrix(const Matrix& other);
+    Matrix(Matrix&& other) noexcept;
+    Matrix& operator=(const Matrix& other);
+    Matrix& operator=(Matrix&& other) noexcept;
+    friend void swap(Matrix& first, Matrix& second) noexcept;
 
 
 private:

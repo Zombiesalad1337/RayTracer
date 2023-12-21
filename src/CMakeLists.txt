@@ -12,4 +12,4 @@ target_link_libraries(point tuple)
 target_link_libraries(color tuple)
 target_link_libraries(canvas color)
 
-target_link_libraries(main vec point canvas)
+target_link_libraries(main matrix vec point canvas)
