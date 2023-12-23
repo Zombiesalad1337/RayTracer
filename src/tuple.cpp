@@ -18,10 +18,10 @@ bool Tuple::isPoint(){
 //TODO: make that inline
 //I guess inline is not possible because of inheritance, both point and vec can call equals
 bool Tuple::equals(const Tuple& tup){
-    return abs(this->x - tup.x) < EPSILON 
-        && abs(this->y - tup.y) < EPSILON 
-        && abs(this->z - tup.z) < EPSILON 
-        && abs(this->w - tup.w) < EPSILON;
+    return fabs(this->x - tup.x) < EPSILON 
+        && fabs(this->y - tup.y) < EPSILON 
+        && fabs(this->z - tup.z) < EPSILON 
+        && fabs(this->w - tup.w) < EPSILON;
 }
 
 Tuple Tuple::operator-() const{

@@ -4,6 +4,7 @@ add_library(point point.cpp)
 add_library(color color.cpp)
 add_library(canvas canvas.cpp)
 add_library(matrix matrix.cpp)
+add_library(ray ray.cpp)
 
 add_executable(main main.cpp)
 
@@ -12,4 +13,4 @@ target_link_libraries(point tuple)
 target_link_libraries(color tuple)
 target_link_libraries(canvas color)
 
-target_link_libraries(main matrix vec point canvas)
+target_link_libraries(main ray matrix vec point canvas)
