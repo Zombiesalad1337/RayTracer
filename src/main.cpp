@@ -11,17 +11,17 @@ int main(){
     const int kWidth = 1920;
     const int kHeight = 1080;
     rt::Canvas canvas(kWidth, kHeight);    
-    rt::Color cyan(0, 1, 1);
+    rt::Color white(1, 1, 1);
     rt::Point baseRef(300, 0, 0);
     
     rt::Matrix bringToCenterOfCanvas = rt::Matrix::translation(kWidth / 2, kHeight / 2, 0);
     rt::Point threeOClock = bringToCenterOfCanvas * baseRef;
-    canvas.setPixel(threeOClock.x, threeOClock.y, cyan);
+    canvas.setPixel(threeOClock.x, threeOClock.y, white);
     for (int i = 1; i < 12; ++i){
         rt::Point hand = bringToCenterOfCanvas * rt::Matrix::rotationZ((i * M_PI) / 6) * baseRef;
         std::cout << "i: " << i << std::endl;
         hand.print();
-        canvas.setPixel(hand.x, hand.y, cyan);
+        canvas.setPixel(hand.x, hand.y, white);
     }
     canvas.writePNG("clockHands");
 
