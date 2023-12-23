@@ -29,6 +29,19 @@ public:
     Matrix& operator=(Matrix&& other) noexcept;
     friend void swap(Matrix& first, Matrix& second) noexcept;
 
+    //TRANSFORMATIONS
+
+    static Matrix translation(float x, float y, float z);
+    static Matrix scaling(float x, float y, float z);
+    static Matrix rotationX(float theta);
+    static Matrix rotationY(float theta);
+    static Matrix rotationZ(float theta);
+    static Matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
+
+
+    static Matrix identity();
+    
+
 
 private:
     int size; 

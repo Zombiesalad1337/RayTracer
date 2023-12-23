@@ -342,10 +342,159 @@ TEST(Matrix, multiplyProductByInverse){
     EXPECT_EQ(a * b * b.inverse(), a);
 }
 
+TEST(Matrix, translation){
+    rt::Matrix transform = rt::Matrix::translation(5, -3, 2);
+    rt::Point p(-3, 4, 5);
+    rt::Point translated(2, 1, 7);
+    EXPECT_EQ(transform * p, translated);
+}
 
+TEST(Matrix, translationInv){
+    rt::Matrix transform = rt::Matrix::translation(5, -3, 2);
+    rt::Matrix inv = transform.inverse();
+    rt::Point p(-3, 4, 5);
+    rt::Point translated(-8, 7, 3);
+    EXPECT_EQ(inv * p, translated);
+}
 
+TEST(Matrix, translationVec){
+    rt::Matrix transform = rt::Matrix::translation(5, -3, 2);
+    rt::Vec v(-3, 4, 5);
+    EXPECT_EQ(transform * v, v);
+}
 
+TEST(Matrix, scaling){
+    rt::Matrix transform = rt::Matrix::scaling(2, 3, 4);
+    rt::Point p(-4, 6, 8);
+    rt::Point scaled(-8, 18, 32);
+    EXPECT_EQ(transform * p, scaled);
+}
 
+TEST(Matrix, scalingVec){
+    rt::Matrix transform = rt::Matrix::scaling(2, 3, 4);
+    rt::Vec v(-4, 6, 8);
+    rt::Vec scaled(-8, 18, 32);
+    EXPECT_EQ(transform * v, scaled);
+}
 
+TEST(Matrix, scalingInv){
+    rt::Matrix transform = rt::Matrix::scaling(2, 3, 4);
+    rt::Matrix inv = transform.inverse();
+    rt::Vec v(-4, 6, 8);
+    rt::Vec scaled(-2, 2, 2);
+    EXPECT_EQ(inv * v, scaled);
+}
 
+TEST(Matrix, reflectAcrossXAxis){
+    rt::Matrix transform = rt::Matrix::scaling(-1, 1, 1);
+    rt::Point p(2, 3, 4);
+    rt::Point reflected(-2, 3, 4);
+    EXPECT_EQ(transform * p, reflected);
+}
+
+TEST(Matrix, rotateX){
+    rt::Matrix half_quarter = rt::Matrix::rotationX(M_PI / 4);
+    rt::Matrix full_quarter = rt::Matrix::rotationX(M_PI / 2);
+    rt::Point p(0, 1, 0);
+    rt::Point half_rotated(0, std::sqrt(2) / 2, std::sqrt(2) / 2);
+    rt::Point full_rotated(0, 0, 1);
+    EXPECT_EQ(half_quarter * p, half_rotated);
+    EXPECT_EQ(full_quarter * p, full_rotated);
+}
+
+TEST(Matrix, rotateXInv){
+    rt::Matrix half_quarter = rt::Matrix::rotationX(M_PI / 4);
+    rt::Point p(0, 1, 0);
+    rt::Matrix half_quarter_inv = half_quarter.inverse();
+    rt::Point half_rotated_inv(0, std::sqrt(2) / 2, -std::sqrt(2) / 2);
+    EXPECT_EQ(half_quarter_inv * p, half_rotated_inv);
+}
+
+TEST(Matrix, rotateY){
+    rt::Matrix half_quarter = rt::Matrix::rotationY(M_PI / 4);
+    rt::Matrix full_quarter = rt::Matrix::rotationY(M_PI / 2);
+    rt::Point p(0, 0, 1);
+    rt::Point half_rotated(std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
+    rt::Point full_rotated(1, 0, 0);
+    EXPECT_EQ(half_quarter * p, half_rotated);
+    EXPECT_EQ(full_quarter * p, full_rotated);
+}
+
+TEST(Matrix, rotateZ){
+    rt::Matrix half_quarter = rt::Matrix::rotationZ(M_PI / 4);
+    rt::Matrix full_quarter = rt::Matrix::rotationZ(M_PI / 2);
+    rt::Point p(0, 1, 0);
+    rt::Point half_rotated(-std::sqrt(2) / 2,  std::sqrt(2) / 2, 0);
+    rt::Point full_rotated(-1, 0, 0);
+    EXPECT_EQ(half_quarter * p, half_rotated);
+    EXPECT_EQ(full_quarter * p, full_rotated);
+}
+
+TEST(Matrix, shearXY){
+    rt::Matrix shearing = rt::Matrix::shearing(1, 0, 0, 0, 0, 0);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(5, 3, 4);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, shearXZ){
+    rt::Matrix shearing = rt::Matrix::shearing(0, 1, 0, 0, 0, 0);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(6, 3, 4);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, shearYX){
+    rt::Matrix shearing = rt::Matrix::shearing(0, 0, 1, 0, 0, 0);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(2, 5, 4);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, shearYZ){
+    rt::Matrix shearing = rt::Matrix::shearing(0, 0, 0, 1, 0, 0);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(2, 7, 4);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, shearZX){
+    rt::Matrix shearing = rt::Matrix::shearing(0, 0, 0, 0, 1, 0);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(2, 3, 6);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, shearZY){
+    rt::Matrix shearing = rt::Matrix::shearing(0, 0, 0, 0, 0, 1);
+    rt::Point p(2, 3, 4);
+    rt::Point sheared(2, 3, 7);
+    EXPECT_EQ(shearing * p, sheared);
+}
+
+TEST(Matrix, transformationsOneByOne){
+    rt::Point p(1, 0, 1);
+    rt::Matrix A = rt::Matrix::rotationX(M_PI / 2);
+    rt::Matrix B = rt::Matrix::scaling(5, 5, 5);
+    rt::Matrix C = rt::Matrix::translation(10, 5, 7);
+
+    rt::Point p2 = A * p;
+    EXPECT_EQ(p2, rt::Point(1, -1, 0));
+    rt::Point p3 = B * p2;
+    EXPECT_EQ(p3, rt::Point(5, -5, 0));
+    rt::Point p4 = C * p3;
+    EXPECT_EQ(p4, rt::Point(15, 0, 7));
+}
+
+TEST(Matrix, chainTransformation){
+    rt::Point p(1, 0, 1);
+    rt::Matrix A = rt::Matrix::rotationX(M_PI / 2);
+    rt::Matrix B = rt::Matrix::scaling(5, 5, 5);
+    rt::Matrix C = rt::Matrix::translation(10, 5, 7);
+
+    rt::Matrix T = C * B * A;
+
+    EXPECT_EQ(T * p, rt::Point(15, 0, 7));
+    EXPECT_EQ(C * B * A * p, rt::Point(15, 0, 7));
+}
 

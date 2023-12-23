@@ -345,6 +345,17 @@ Matrix Matrix::rotationZ(float theta){
     return Matrix(vec);
 }
 
+Matrix Matrix::shearing(float xy, float xz, float yx, float yz, float zx, float zy){
+    std::vector<std::vector<float>> vec = {{1, xy, xz, 0}, {yx, 1, yz, 0}, {zx, zy, 1, 0}, {0, 0, 0, 1}}; 
+    return Matrix(vec);
+        
+}
+
+Matrix Matrix::identity(){
+    std::vector<std::vector<float>> vec = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}; 
+        return Matrix(vec);
+     
+}
 
 }
 //namespace rt
