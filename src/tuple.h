@@ -34,6 +34,8 @@ public:
 
     bool operator!=(const Tuple& tup) const;
 
+    void print() const;
+
 
 };
 

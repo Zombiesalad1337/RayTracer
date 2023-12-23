@@ -1,5 +1,6 @@
 #include "tuple.h"
 #include <cmath>
+#include <iostream>
 
 namespace rt {
 
@@ -69,6 +70,10 @@ bool Tuple::operator==(const Tuple& tup) const{
 
 bool Tuple::operator!=(const Tuple& tup) const{
     return !operator==(tup);
+}
+
+void Tuple::print() const{
+    std::cout << "X: " << x << " Y:" << y << " Z:" << z << " W: " << w << std::endl;
 }
 
 
