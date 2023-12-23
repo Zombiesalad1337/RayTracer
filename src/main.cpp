@@ -3,28 +3,28 @@
 #include "point.h"
 #include "vec.h"
 #include "matrix.h"
+#include "canvas.h"
+#include <cmath>
 
 
 int main(){
-    std::cout << "Initial setup" << std::endl;
-    std::vector<std::vector<float>> originalMatrix = {
-        {2, 1, 4},
-        {1, 3, 5},
-        {6, 2, 1}
-    };
-    std::vector<std::vector<float>> inverseMatrix = {
-        {-1.5, 1, -2.5},
-        {0.5, 0, 0.5},
-        {1, -2, 1}
-    };
+    const int kWidth = 1920;
+    const int kHeight = 1080;
+    rt::Canvas canvas(kWidth, kHeight);    
+    rt::Color cyan(0, 1, 1);
+    rt::Point baseRef(300, 0, 0);
+    
+    rt::Matrix bringToCenterOfCanvas = rt::Matrix::translation(kWidth / 2, kHeight / 2, 0);
+    rt::Point threeOClock = bringToCenterOfCanvas * baseRef;
+    canvas.setPixel(threeOClock.x, threeOClock.y, cyan);
+    for (int i = 1; i < 12; ++i){
+        rt::Point hand = bringToCenterOfCanvas * rt::Matrix::rotationZ((i * M_PI) / 6) * baseRef;
+        std::cout << "i: " << i << std::endl;
+        hand.print();
+        canvas.setPixel(hand.x, hand.y, cyan);
+    }
+    canvas.writePNG("clockHands");
 
-    rt::Matrix og(originalMatrix);
-    rt::Matrix inv(inverseMatrix);
-    std::cout <<"here2" << std::endl;
-    og.print();
-    inv.print();
-    std::cout <<"here2" << std::endl;
-    rt::Matrix m = og.inverse();
     return 0;
 }
 
