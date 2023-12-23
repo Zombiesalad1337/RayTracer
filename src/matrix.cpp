@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "matrix.h"
+#include <cmath>
 
 
 namespace rt{
@@ -250,9 +251,9 @@ bool Matrix::invertible() const{
 }
 
 Matrix Matrix::inverse() const{
-    int determinant = det();
+    float determinant = det();
     //TODO: Throw expection instead
-    if (determinant == 0){
+    if (fabs(determinant) < EPSILON){
         std::cerr << "MATRIX NON-INVERTIBLE" << std::endl;
         return 0;
     }
@@ -314,6 +315,34 @@ void swap(Matrix& first, Matrix& second) noexcept {
     using std::swap;
     swap(first.size, second.size);
     swap(first.data, second.data);
+}
+
+Matrix Matrix::translation(float x, float y, float z){
+    //TODO: FIX THIS SHITTY IMPLEMENTATION
+    //TOO MUCH GUNK, TOO MANY MEMORY LOOKUPS
+    //BETTER CREATE different classes for 2x2, 3x3, and 4x4 matrices -> OR USE UNION??
+    std::vector<std::vector<float>> vec = {{1, 0, 0, x}, {0, 1, 0, y}, {0, 0, 1, z}, {0, 0, 0, 1}}; 
+    return Matrix(vec);
+}
+
+Matrix Matrix::scaling(float x, float y, float z){
+    std::vector<std::vector<float>> vec = {{x, 0, 0, 0}, {0, y, 0, 0}, {0, 0, z, 0}, {0, 0, 0, 1}}; 
+    return Matrix(vec);
+}
+
+Matrix Matrix::rotationX(float theta){
+    std::vector<std::vector<float>> vec = {{1, 0, 0, 0}, {0, std::cos(theta), -std::sin(theta), 0}, {0, std::sin(theta), std::cos(theta), 0}, {0, 0, 0, 1}}; 
+        return Matrix(vec);
+}
+
+Matrix Matrix::rotationY(float theta){
+    std::vector<std::vector<float>> vec = {{std::cos(theta), 0, std::sin(theta), 0}, {0, 1, 0, 0}, {-std::sin(theta), 0, std::cos(theta), 0}, {0, 0, 0, 1}}; 
+        return Matrix(vec);
+}
+
+Matrix Matrix::rotationZ(float theta){
+    std::vector<std::vector<float>> vec = {{std::cos(theta), -std::sin(theta), 0, 0}, {std::sin(theta), std::cos(theta), 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}; 
+    return Matrix(vec);
 }
 
 
