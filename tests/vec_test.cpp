@@ -32,12 +32,12 @@ TEST(Vec, normalize){
 TEST(Vec, dotProduct){
     rt::Vec a(1, 2, 3);
     rt::Vec b(2, 3, 4);
-    EXPECT_EQ(dot(a, b), 20);
+    EXPECT_EQ(rt::Vec::dot(a, b), 20);
 }
 
 TEST(Vec, crossProduct){
     rt::Vec a(1, 2, 3);
     rt::Vec b(2, 3, 4);
-    EXPECT_EQ(cross(a, b), rt::Vec(-1, 2, -1));
-    EXPECT_EQ(cross(b, a), rt::Vec(1, -2, 1));
+    EXPECT_EQ(rt::Vec::cross(a, b), rt::Vec(-1, 2, -1));
+    EXPECT_EQ(rt::Vec::cross(b, a), rt::Vec(1, -2, 1));
 }

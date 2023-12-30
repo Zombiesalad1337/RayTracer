@@ -12,9 +12,10 @@ public:
     Vec(Tuple&& tup);
     float magnitude() const;
     Vec norm() const;
+
+    static float dot(const Vec& a, const Vec& b);
+    static Vec cross(const Vec& a, const Vec& b);
 };
 
-float dot(const Vec& a, const Vec& b);
-Vec cross(const Vec& a, const Vec& b);
 
 } //namespace rt
