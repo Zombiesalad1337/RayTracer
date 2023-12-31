@@ -17,4 +17,4 @@ target_link_libraries(color tuple)
 target_link_libraries(canvas color)
 target_link_libraries(sphere shape)
 
-target_link_libraries(main intersection shape ray matrix vec point canvas)
+target_link_libraries(main intersection sphere ray matrix vec point canvas)

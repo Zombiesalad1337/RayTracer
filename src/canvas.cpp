@@ -9,8 +9,12 @@
 namespace rt{
 
 Canvas::Canvas(int width, int height) : width(width), height(height), canvas(width){
+    Color black(0, 0, 0);
     for (int i = 0; i < width; ++i){
         canvas[i].reserve(height);
+        for (int j = 0; j < height; ++j){
+            canvas[i][j] = black; 
+        }
     }
 }
 
