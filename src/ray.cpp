@@ -1,4 +1,5 @@
 #include "ray.h"
+
 namespace rt{
 
 Ray::Ray(const Point& origin, const Vec& direction) : mOrigin(origin), mDirection(direction) {}
@@ -16,4 +17,8 @@ Point Ray::position(float t) const{
     return Point(mOrigin + mDirection * t);
 }
 
+Ray Ray::transform(const Matrix& mat) const{
+    return Ray(mat * origin(), mat * direction());    
 }
+
+} //namespace rt

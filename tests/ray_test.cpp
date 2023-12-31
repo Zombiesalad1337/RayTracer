@@ -27,3 +27,24 @@ TEST(Ray, position){
     EXPECT_EQ(r.position(-1), rt::Point(1, 3, 4));
     EXPECT_EQ(r.position(2.5), rt::Point(4.5, 3, 4));
 }
+
+TEST(Ray, translate){
+    rt::Ray r(rt::Point(1, 2, 3), rt::Vec(0, 1, 0));
+    rt::Matrix m = rt::Matrix::translation(3, 4, 5);
+
+    rt::Ray r2 = r.transform(m);
+
+    EXPECT_EQ(r2.origin(), rt::Point(4, 6, 8));
+    EXPECT_EQ(r2.direction(), rt::Vec(0, 1, 0));
+}
+
+TEST(Ray, scale){
+    rt::Ray r(rt::Point(1, 2, 3), rt::Vec(0, 1, 0));
+    rt::Matrix m = rt::Matrix::scaling(2, 3, 4);
+
+    rt::Ray r2 = r.transform(m);
+
+    EXPECT_EQ(r2.origin(), rt::Point(2, 6, 12));
+    //direction left unnormalized. Essential as scaling stretches the vector, so it covers more distance per unit t
+    EXPECT_EQ(r2.direction(), rt::Vec(0, 3, 0));
+}

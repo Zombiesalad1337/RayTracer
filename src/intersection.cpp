@@ -9,15 +9,16 @@ namespace rt{
 Intersection::Intersection(float t, const Shape* object) : t(t), object(object) {}
 
 std::optional<std::vector<Intersection>> Intersection::intersect(const Shape& shape, const Ray& ray, std::vector<Intersection>& intersections) {
+    rt::Ray rayObjectSpace = ray.transform(shape.getTransform().inverse());
     std::vector<Intersection> intersects;
-    switch (shape.type) {
+    switch (shape.type()) {
         case SPHERE:
             std::cout << "SPHERE\n";
-            Vec sphereToRay = ray.origin() - Point(0, 0, 0);
+            Vec sphereToRayObjectSpace = rayObjectSpace.origin() - Point(0, 0, 0);
             
-            float a = Vec::dot(ray.direction(), ray.direction());
-            float b = 2 * Vec::dot(ray.direction(), sphereToRay);
-            float c = Vec::dot(sphereToRay, sphereToRay) - 1;
+            float a = Vec::dot(rayObjectSpace.direction(), rayObjectSpace.direction());
+            float b = 2 * Vec::dot(rayObjectSpace.direction(), sphereToRayObjectSpace);
+            float c = Vec::dot(sphereToRayObjectSpace, sphereToRayObjectSpace) - 1;
 
             float discriminant = b * b - 4 * a * c;
 

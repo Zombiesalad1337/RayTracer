@@ -4,6 +4,7 @@
 #include <string>
 #include "point.h"
 #include "vec.h"
+#include "matrix.h"
 
 namespace rt{
 
@@ -18,6 +19,8 @@ public:
     Vec direction() const;
 
     Point position(float t) const;
+
+    Ray transform(const Matrix& mat) const;
 
 private:
     //cant have variable and member function with same name in c++. Could've kept variable names origin, direction, but then needed to change method names to getOrigin, get direction. Added m instead here.

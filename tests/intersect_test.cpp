@@ -246,3 +246,39 @@ TEST(Intersection, hitVeryClosetoZero){
     // std::cout << "t: " << i.value().t << std::endl;
     EXPECT_EQ(i.value(), i3);
 }
+
+TEST(Intersection, scaledSphere){
+    rt::Ray r(rt::Point(0, 0, -5), rt::Vec(0, 0, 1));
+    rt::Sphere sp;
+    rt::Shape& s = sp;
+    
+    s.setTransform(rt::Matrix::scaling(2, 2, 2));
+
+    std::vector<rt::Intersection> intersections;
+    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    // std::cout << "has_value: " << xs.has_value() << std::endl;
+    int size = xs.has_value() ? xs.value().size() : 0;
+
+    EXPECT_EQ(size, 2);
+    
+    if (size == 2){
+        EXPECT_NEAR(xs.value()[0].t, 3.0f, EPSILON);
+        EXPECT_NEAR(xs.value()[1].t, 7.0f, EPSILON);
+    }
+}
+
+TEST(Intersection, translatedSphere){
+    rt::Ray r(rt::Point(0, 0, -5), rt::Vec(0, 0, 1));
+    rt::Sphere sp;
+    rt::Shape& s = sp;
+    
+    s.setTransform(rt::Matrix::translation(5, 0, 0));
+
+    std::vector<rt::Intersection> intersections;
+    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    // std::cout << "has_value: " << xs.has_value() << std::endl;
+    
+    EXPECT_FALSE(xs.has_value());
+
+    
+}
