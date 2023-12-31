@@ -12,6 +12,7 @@ Canvas::Canvas(int width, int height) : width(width), height(height), canvas(wid
     Color black(0, 0, 0);
     for (int i = 0; i < width; ++i){
         canvas[i].reserve(height);
+        //if memory of previous canvas object is assigned to new canvas object, then the contents of previous canvas remained on new canvas. Forecefully setting each new canvas pixel to black.
         for (int j = 0; j < height; ++j){
             canvas[i][j] = black; 
         }
