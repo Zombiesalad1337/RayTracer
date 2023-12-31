@@ -8,6 +8,7 @@ add_executable(color_test_exec color_test.cpp)
 add_executable(canvas_test_exec canvas_test.cpp)
 add_executable(matrix_test_exec matrix_test.cpp)
 add_executable(ray_test_exec ray_test.cpp)
+add_executable(intersect_test_exec intersect_test.cpp)
 
 add_library(tuple_test tuple_test.cpp)
 add_library(vec_test vec_test.cpp)
@@ -15,6 +16,7 @@ add_library(color_test color_test.cpp)
 add_library(canvas_test canvas_test.cpp)
 add_library(matrix_test matrix_test.cpp)
 add_library(ray_test ray_test.cpp)
+add_library(intersect_test intersect_test.cpp)
 
 target_include_directories(tuple_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(vec_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
@@ -22,6 +24,7 @@ target_include_directories(color_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(canvas_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(matrix_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(ray_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(intersect_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 
 target_link_libraries(tuple_test_exec
@@ -73,6 +76,19 @@ target_link_libraries(ray_test_exec
                         point
                         gtest gtest_main
 )
+target_link_libraries(intersect_test_exec
+                        intersection
+                        sphere
+                        shape
+                        ray
+                        matrix
+                        canvas
+                        color
+                        tuple
+                        vec
+                        point
+                        gtest gtest_main
+)
 
 add_test(
     NAME tuple_test_exec
@@ -98,4 +114,8 @@ add_test(
 add_test(
     NAME ray_test_exec
     COMMAND ${EXECUTABLE_OUTPUT_PATH}/ray_test_exec
+    )
+add_test(
+    NAME intersect_test_exec
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/intersect_test_exec
     )

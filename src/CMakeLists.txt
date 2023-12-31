@@ -5,6 +5,9 @@ add_library(color color.cpp)
 add_library(canvas canvas.cpp)
 add_library(matrix matrix.cpp)
 add_library(ray ray.cpp)
+add_library(shape shape.cpp)
+add_library(sphere sphere.cpp)
+add_library(intersection intersection.cpp)
 
 add_executable(main main.cpp)
 
@@ -12,5 +15,6 @@ target_link_libraries(vec tuple)
 target_link_libraries(point tuple)
 target_link_libraries(color tuple)
 target_link_libraries(canvas color)
+target_link_libraries(sphere shape)
 
-target_link_libraries(main ray matrix vec point canvas)
+target_link_libraries(main intersection shape ray matrix vec point canvas)

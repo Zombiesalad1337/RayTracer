@@ -2,6 +2,7 @@
 #include "vec.h"
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 namespace rt{
 
@@ -11,6 +12,7 @@ std::optional<std::vector<Intersection>> Intersection::intersect(const Shape& sh
     std::vector<Intersection> intersects;
     switch (shape.type) {
         case SPHERE:
+            std::cout << "SPHERE\n";
             Vec sphereToRay = ray.origin() - Point(0, 0, 0);
             
             float a = Vec::dot(ray.direction(), ray.direction());
@@ -33,7 +35,7 @@ std::optional<std::vector<Intersection>> Intersection::intersect(const Shape& sh
                 return intersects;
             }
     }
-    return intersects;
+    return std::nullopt;
 }
 
 std::optional<Intersection> Intersection::hit(std::vector<Intersection>& intersections){
@@ -41,14 +43,33 @@ std::optional<Intersection> Intersection::hit(std::vector<Intersection>& interse
         return a.t < b.t;
     });
 
+    // std::cout << "After sort: ";
+    // for (auto i : intersections){
+    //     std::cout << "i->t:  " << i.t;
+    // }
+    // std::cout << std::endl;cout
+    
+    //-EPSILON instead of 0.0f was identifying -EPSILON as a hit. Switched to 0.0f instead.
+    //TODO: might break for values very very close to zero.
     auto it = std::lower_bound(intersections.begin(), intersections.end(), 0.0f, [](const Intersection& a, float val){
-                                                                                    return std::fabs(a.t - val) < EPSILON;
-                                                                                    });
+                            //a.t < -EPSILON
+                            //true for negative values
+                            return a.t < val;
+                            });
 
     if (it != intersections.end()){
+        // std::cout << "hit: " << it->t << std::endl;
         return *it;
     }
     return std::nullopt;
+}
+
+bool Intersection::operator==(const Intersection& i) const{
+    return std::fabs(t - i.t) < EPSILON && object == i.object;
+}
+
+bool Intersection::operator!=(const Intersection& i) const{
+    return !operator==(i);
 }
 
 }

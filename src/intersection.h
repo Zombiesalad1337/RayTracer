@@ -19,6 +19,9 @@ public:
     //Accumulate intersections for all intersects in the Intersections* vector
     static std::optional<std::vector<Intersection>> intersect(const Shape& shape, const Ray& ray, std::vector<Intersection>& intersections);
 
+    bool operator==(const Intersection& i) const;
+    bool operator!=(const Intersection& i) const;
+
 };
 
 }
