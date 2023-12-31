@@ -13,7 +13,7 @@ std::optional<std::vector<Intersection>> Intersection::intersect(const Shape& sh
     std::vector<Intersection> intersects;
     switch (shape.type()) {
         case SPHERE:
-            std::cout << "SPHERE\n";
+            // std::cout << "SPHERE\n";
             Vec sphereToRayObjectSpace = rayObjectSpace.origin() - Point(0, 0, 0);
             
             float a = Vec::dot(rayObjectSpace.direction(), rayObjectSpace.direction());
