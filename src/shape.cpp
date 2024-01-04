@@ -13,4 +13,7 @@ ShapeType Shape::type() const { return mType; }
 Matrix Shape::getTransform() const { return mTransform; }
 void Shape::setTransform(const Matrix& mat) { mTransform = mat; }
 
+Material Shape::material() const { return mMaterial; }
+void Shape::setMaterial(const Material& material) { mMaterial = material; }
+
 }

@@ -1,5 +1,6 @@
 #include "color.h"
 #include <iostream>
+#include <cmath>
 
 namespace rt{
 
@@ -24,4 +25,6 @@ Color Color::operator*(const Color& c) const{
 float Color::r() const{ return this->x; }
 float Color::g() const{ return this->y; }
 float Color::b() const{ return this->z; }
+
+
 }//namespace rt

@@ -1,9 +1,11 @@
 #pragma once
-#include "tuple.h"
+#include "point_light.h"
+#include "material.h"
+#include "vec.h"
+#include "point.h"
 
 
 namespace rt{
-
 class Color : public Tuple{
 public:
     //https://stackoverflow.com/questions/5679073/overloading-operators-in-derived-class
@@ -27,7 +29,6 @@ public:
     float g() const;
     float b() const;
 
-    
 
 
 

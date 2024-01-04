@@ -54,3 +54,19 @@ TEST(Sphere, normalTranslated){
     rt::Vec n = s.normalAt(rt::Point(0, 1.70711, -0.70711)); 
     EXPECT_EQ(n, rt::Vec(0, 0.70711, -0.70711));
 }
+
+TEST(Sphere, defaultMaterial){
+    rt::Sphere sp;
+    rt::Shape& s = sp;
+    EXPECT_EQ(s.material(), rt::Material());
+}
+
+TEST(Sphere, setMaterial){
+    rt::Sphere sp;
+    rt::Shape& s = sp;
+    rt::Material m;
+    m.setAmbient(1.0f);
+    s.setMaterial(m);
+    EXPECT_EQ(s.material(), m);
+    EXPECT_NEAR(s.material().ambient(), 1.0f, EPSILON);
+}

@@ -34,3 +34,4 @@ TEST(Color, HadamardProduct){
     rt::Color c2(0.9, 1, 0.1);
     EXPECT_EQ(c1 * c2, rt::Color(0.9, 0.2, 0.04));
 }
+
