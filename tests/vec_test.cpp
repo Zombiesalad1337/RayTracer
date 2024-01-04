@@ -41,3 +41,15 @@ TEST(Vec, crossProduct){
     EXPECT_EQ(rt::Vec::cross(a, b), rt::Vec(-1, 2, -1));
     EXPECT_EQ(rt::Vec::cross(b, a), rt::Vec(1, -2, 1));
 }
+
+TEST(Vec, reflection1){
+    rt::Vec v(1, -1, 0);
+    rt::Vec n(0, 1, 0);
+    EXPECT_EQ(v.reflect(n), rt::Vec(1, 1, 0));
+}
+
+TEST(Vec, reflection2){
+    rt::Vec v(0, -1, 0);
+    rt::Vec n(sqrtf(2)/2, sqrtf(2)/2, 0);
+    EXPECT_EQ(v.reflect(n), rt::Vec(1, 0, 0));
+}

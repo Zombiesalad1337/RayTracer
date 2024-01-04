@@ -33,6 +33,11 @@ Vec Vec::cross(const Vec& a, const Vec& b){
                a.x * b.y - a.y * b.x);
 }
 
+//TODO:is the reflected vec normalized?
+//Is it normalized only when both in and normal vectors are normalized
+Vec Vec::reflect(const Vec& normal) const{
+    return *this - normal * 2 * dot(*this, normal);
+}
 
 
 }//namespace rt
