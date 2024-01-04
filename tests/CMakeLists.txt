@@ -154,7 +154,7 @@ target_link_libraries(material_test_exec
                         point
                         gtest gtest_main
 )
-target_link_libraries(lighting
+target_link_libraries(lighting_test_exec
                        lighting 
                        material
                         sphere

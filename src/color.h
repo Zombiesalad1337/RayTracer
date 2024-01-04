@@ -1,6 +1,4 @@
 #pragma once
-#include "point_light.h"
-#include "material.h"
 #include "vec.h"
 #include "point.h"
 

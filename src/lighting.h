@@ -1,9 +1,6 @@
 #pragma once
-#include "color.h"
 #include "point_light.h"
 #include "material.h"
-#include "vec.h"
-#include "point.h"
 
 namespace rt{
 
