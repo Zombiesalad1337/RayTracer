@@ -39,10 +39,12 @@ std::optional<std::vector<Intersection>> Intersection::intersect(const Shape& sh
     return std::nullopt;
 }
 
-std::optional<Intersection> Intersection::hit(std::vector<Intersection>& intersections){
-    std::sort(intersections.begin(), intersections.end(), [](const Intersection& a, const Intersection& b){
-        return a.t < b.t;
-    });
+std::optional<Intersection> Intersection::hit(std::vector<Intersection>& intersections, bool alreadySorted){
+    if (!alreadySorted){
+        std::sort(intersections.begin(), intersections.end(), [](const Intersection& a, const Intersection& b){
+            return a.t < b.t;
+        });
+    }
 
     // std::cout << "After sort: ";
     // for (auto i : intersections){

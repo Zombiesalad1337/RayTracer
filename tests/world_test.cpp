@@ -8,6 +8,7 @@
 #include "../src/point_light.h"
 #include "../src/lighting.h"
 #include "../src/world.h"
+#include "../src/computation.h"
     
 TEST(World, WorldEmpty){
     rt::World w;
@@ -41,4 +42,51 @@ TEST(World, intersect){
     EXPECT_NEAR(xs.value()[1].t, 4.5, EPSILON);
     EXPECT_NEAR(xs.value()[2].t, 5.5, EPSILON);
     EXPECT_NEAR(xs.value()[3].t, 6, EPSILON);
+}
+
+TEST(World, shadeHit){
+    rt::World w = rt::World::defaultWorld();
+    rt::Ray r(rt::Point(0, 0, -5), rt::Vec(0, 0, 1));
+    
+    const rt::Shape* shape = w.shapes()[0];
+    rt::Intersection i(4, shape);
+    rt::Computation comp(i, r);
+    rt::Color shadeHit = w.shadeHit(comp);
+    EXPECT_EQ(shadeHit, rt::Color(0.38066, 0.47583, 0.2855));
+}
+
+TEST(World, colorAtNoHit){
+    rt::World w = rt::World::defaultWorld();
+    rt::Ray r(rt::Point(0, 0, -5), rt::Vec(0, 1, 0));
+    rt::Color c = w.colorAt(r);
+    EXPECT_EQ(c, rt::Color(0, 0, 0));
+    
+}
+
+TEST(World, colorAtOuterSphere){
+    rt::World w = rt::World::defaultWorld();
+    rt::Ray r(rt::Point(0, 0, -5), rt::Vec(0, 0, 1));
+    rt::Color c = w.colorAt(r);
+    EXPECT_EQ(c, rt::Color(0.38066, 0.47583, 0.2855));
+}
+
+TEST(World, colorAtInnerSphere){
+    rt::World w = rt::World::defaultWorld();
+    rt::Shape* outer = w.shapes()[0];
+    rt::Shape* inner = w.shapes()[1];
+    outer->material().setAmbient(1);
+    inner->material().setAmbient(1);
+    rt::Material newMat = outer->material();
+    newMat.setAmbient(1);
+    //TODO: unable to setAmbient, doesn't update, due to const?
+    // std::cout << w.shapes()[1]->material().ambient() << std::endl;
+    // w.shapes()[1]->material().setAmbient(1);
+    // std::cout << w.shapes()[1]->material().ambient() << std::endl;
+    // std::cout << newMat.ambient() << std::endl;
+    outer->setMaterial(newMat);
+    inner->setMaterial(newMat);
+    // std::cout << w.shapes()[1]->material().ambient() << std::endl;
+    rt::Ray r(rt::Point(0, 0, 0.75), rt::Vec(0, 0, -1));
+    rt::Color c = w.colorAt(r);
+    EXPECT_EQ(c, inner->material().color());
 }

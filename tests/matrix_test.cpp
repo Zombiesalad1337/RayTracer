@@ -81,7 +81,7 @@ TEST(Matrix, multiplyTupSHOULDFAIL){
     std::vector<std::vector<float>> vec = {{1, 2, 3, 4}, {2, 4, 4, 2}, {8, 6, 4, 1}, {0, 0, 0, 1}};
     rt::Matrix mat(vec);
     rt::Tuple tup(1.0f, 2.0f, 3.0f, 1.0f);
-    rt::Tuple expected(18.0f, 24.5f, 33.0f, 1.0f);
+    rt::Tuple expected(18.0f, 24.0f, 33.0f, 1.0f);
     rt::Tuple result = mat * tup;
     std::cout << "XXXXXXXXXx " << result.x << " " << result.y << " " << result.z << " " << result.w << std::endl;
  

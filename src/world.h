@@ -2,6 +2,8 @@
 #include "sphere.h"
 #include "point_light.h"
 #include "intersection.h"
+#include "computation.h"
+#include "lighting.h"
 #include <vector>
 #include <optional>
 
@@ -14,9 +16,11 @@ public:
     ~World();
     void addShape(Shape* shape);
     void addLight(const PointLight& light);
-    std::vector<PointLight> lights();
-    std::vector<Shape*> shapes();
-    std::optional<std::vector<Intersection>> intersect(const Ray& ray); 
+    std::vector<PointLight> lights() const;
+    std::vector<Shape*> shapes() const;
+    std::optional<std::vector<Intersection>> intersect(const Ray& ray) const; 
+    Color shadeHit(const Computation&  comp) const;
+    Color colorAt(const Ray& ray) const;
 
     static World defaultWorld();
 

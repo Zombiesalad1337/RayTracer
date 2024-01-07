@@ -18,10 +18,10 @@ void World::addLight(const PointLight& light){
     mLights.push_back(light);
 }
 
-std::vector<PointLight> World::lights(){
+std::vector<PointLight> World::lights() const{
     return mLights;
 }
-std::vector<Shape*> World::shapes(){
+std::vector<Shape*> World::shapes() const{
     return mShapes;
 }
 
@@ -45,7 +45,7 @@ World World::defaultWorld(){
     return w;
 }
 
-std::optional<std::vector<Intersection>> World::intersect(const Ray& ray){
+std::optional<std::vector<Intersection>> World::intersect(const Ray& ray) const{
     std::vector<Intersection> intersections;
     for (Shape* shape : mShapes){
         Intersection::intersect(*shape, ray, intersections);
@@ -58,6 +58,27 @@ std::optional<std::vector<Intersection>> World::intersect(const Ray& ray){
     }
     return std::nullopt;
 } 
+
+Color World::shadeHit(const Computation&  comp) const{
+    Color finalColor;
+    for (const PointLight& light : mLights){
+        finalColor = finalColor +  lighting(comp.shape->material(), light, comp.point, comp.eyev, comp.normalv);
+    }
+    return finalColor;
+}
+
+Color World::colorAt(const Ray& ray) const{
+    std::optional<std::vector<Intersection>> intersections = intersect(ray);
+    if (intersections.has_value()){
+        std::optional<Intersection> hit = Intersection::hit(intersections.value(), true);
+        if (hit.has_value()){
+            Computation comp(hit.value(), ray);
+            return shadeHit(comp);
+        }
+    } 
+    //no hit, return black
+    return Color();
+}
 
 }
 
