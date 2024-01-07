@@ -4,10 +4,11 @@
 namespace rt{
 
 World::~World(){
-    for(auto& shape: mShapes){
-        delete shape;
-    }
-    mShapes.clear();
+    //TODO: something's breaking, segfault, FIX
+    // for(auto& shape: mShapes){
+    //     delete shape;
+    // }
+    // mShapes.clear();
 }
 
 void World::addShape(Shape* shape){
