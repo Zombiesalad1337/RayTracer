@@ -14,6 +14,7 @@ add_executable(sphere_test_exec sphere_test.cpp)
 add_executable(point_light_test_exec point_light_test.cpp)
 add_executable(material_test_exec material_test.cpp)
 add_executable(lighting_test_exec lighting_test.cpp)
+add_executable(world_test_exec world_test.cpp)
 
 add_library(tuple_test tuple_test.cpp)
 add_library(vec_test vec_test.cpp)
@@ -27,6 +28,7 @@ add_library(sphere_test sphere_test.cpp)
 add_library(point_light_test point_light_test.cpp)
 add_library(material_test material_test.cpp)
 add_library(lighting_test lighting_test.cpp)
+add_library(world_test world_test.cpp)
 
 target_include_directories(tuple_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(vec_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
@@ -40,6 +42,7 @@ target_include_directories(sphere_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(point_light_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(material_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(lighting_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(world_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 
 target_link_libraries(tuple_test_exec
@@ -168,6 +171,21 @@ target_link_libraries(lighting_test_exec
                         point
                         gtest gtest_main
 )
+target_link_libraries(world_test_exec
+                       world 
+                       lighting
+                       material
+                        sphere
+                        shape
+                        ray
+                        matrix
+                        canvas
+                        color
+                        tuple
+                        vec
+                        point
+                        gtest gtest_main
+)
 add_test(
     NAME tuple_test_exec
     COMMAND ${EXECUTABLE_OUTPUT_PATH}/tuple_test_exec
@@ -216,4 +234,8 @@ add_test(
 add_test(
     NAME lighting_test_exec
     COMMAND ${EXECUTABLE_OUTPUT_PATH}/lighting_test_exec
+    )
+add_test(
+    NAME world_test_exec
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/world_test_exec
     )

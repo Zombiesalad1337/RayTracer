@@ -11,6 +11,7 @@ class Shape{
 public:
 
     Shape(ShapeType type);
+    virtual ~Shape() = default;
 
     int id() const;
     ShapeType type() const;

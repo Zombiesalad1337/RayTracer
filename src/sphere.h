@@ -9,6 +9,7 @@ class Sphere : public Shape{
 public:
     Sphere();
     Vec normalAt(const Point& worldPt) const override;
+    virtual ~Sphere() = default;
 };
 
 }

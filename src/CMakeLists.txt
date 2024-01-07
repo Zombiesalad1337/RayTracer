@@ -11,6 +11,7 @@ add_library(intersection intersection.cpp)
 add_library(point_light point_light.cpp)
 add_library(material material.cpp)
 add_library(lighting lighting.cpp)
+add_library(world world.cpp)
 
 add_executable(main main.cpp)
 
@@ -20,6 +21,8 @@ target_link_libraries(color vec point)
 target_link_libraries(canvas color)
 target_link_libraries(shape material)
 target_link_libraries(sphere shape)
+target_link_libraries(intersection ray)
 target_link_libraries(lighting point_light material point vec)
+target_link_libraries(world intersection)
 
-target_link_libraries(main lighting material point_light intersection sphere ray matrix vec point canvas)
+target_link_libraries(main world lighting material point_light intersection sphere ray matrix vec point canvas)
