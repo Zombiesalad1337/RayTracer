@@ -4,6 +4,7 @@
 namespace rt{
 
 World::~World(){
+    //TODO: FIX, CRASHES HERE, SEQFAULT
     for(auto& shape: mShapes){
         delete shape;
     }
