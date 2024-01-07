@@ -351,7 +351,7 @@ Matrix Matrix::shearing(float xy, float xz, float yx, float yz, float zx, float 
         
 }
 
-Matrix Matrix::viewTransform(const Vec& from, const Vec& to, const Vec& up){
+Matrix Matrix::viewTransform(const Point& from, const Point& to, const Vec& up){
     Vec forward = Vec(to - from).norm();
     Vec left = Vec::cross(forward, up.norm());
     Vec trueUp = Vec::cross(left, forward);

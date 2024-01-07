@@ -80,5 +80,18 @@ Color World::colorAt(const Ray& ray) const{
     return Color();
 }
 
+Canvas World::render(const Camera& camera){
+    Canvas image(camera.hsize(), camera.vsize());
+
+    for (int y = 0; y < camera.vsize(); ++y){
+        for (int x = 0; x < camera.hsize(); ++x){
+            Ray ray = camera.rayForPixel(x, y);
+            Color color = colorAt(ray);
+            image.setPixel(x, y, color);
+        }
+    }
+    return image;
+}
+
 }
 

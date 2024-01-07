@@ -4,6 +4,8 @@
 #include "intersection.h"
 #include "computation.h"
 #include "lighting.h"
+#include "camera.h"
+#include "canvas.h"
 #include <vector>
 #include <optional>
 
@@ -21,6 +23,8 @@ public:
     std::optional<std::vector<Intersection>> intersect(const Ray& ray) const; 
     Color shadeHit(const Computation&  comp) const;
     Color colorAt(const Ray& ray) const;
+    Canvas render(const Camera& camera);
+
 
     static World defaultWorld();
 

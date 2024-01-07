@@ -9,6 +9,7 @@
 #include "../src/lighting.h"
 #include "../src/world.h"
 #include "../src/computation.h"
+#include "../src/camera.h"
     
 TEST(World, WorldEmpty){
     rt::World w;
@@ -89,4 +90,15 @@ TEST(World, colorAtInnerSphere){
     rt::Ray r(rt::Point(0, 0, 0.75), rt::Vec(0, 0, -1));
     rt::Color c = w.colorAt(r);
     EXPECT_EQ(c, inner->material().color());
+}
+
+TEST(World, render){
+    rt::World w = rt::World::defaultWorld();
+    rt::Camera c(11, 11, M_PI / 2);
+    rt::Point from(0, 0, -5);
+    rt::Point to(0, 0, 0);
+    rt::Vec up(0, 1, 0);
+    c.setTransform(rt::Matrix::viewTransform(from, to, up));
+    rt::Canvas image = w.render(c);
+    EXPECT_EQ(image.getPixel(5, 5), rt::Color(0.38066, 0.47583, 0.2855));
 }
