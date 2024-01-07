@@ -498,3 +498,29 @@ TEST(Matrix, chainTransformation){
     EXPECT_EQ(C * B * A * p, rt::Point(15, 0, 7));
 }
 
+TEST(Matrix, defaultViewTransform){
+    rt::Matrix t = rt::Matrix::viewTransform(rt::Vec(0, 0, 0), rt::Vec(0, 0, -1), rt::Vec(0, 1, 0));
+    EXPECT_EQ(t, rt::Matrix::identity());
+}
+
+TEST(Matrix, viewTransformPlusZ){
+    rt::Matrix t = rt::Matrix::viewTransform(rt::Vec(0, 0, 0), rt::Vec(0, 0, 1), rt::Vec(0, 1, 0));
+    EXPECT_EQ(t, rt::Matrix::scaling(-1, 1, -1));
+}
+
+TEST(Matrix, viewTransformMovesTheWorld){
+    rt::Matrix t = rt::Matrix::viewTransform(rt::Vec(0, 0, 8), rt::Vec(0, 0, 0), rt::Vec(0, 1, 0));
+    EXPECT_EQ(t, rt::Matrix::translation(0, 0, -8));
+}
+
+TEST(Matrix, viewTransformArbitrary){
+    rt::Matrix t = rt::Matrix::viewTransform(rt::Vec(1, 3, 2), rt::Vec(4, -2, 8), rt::Vec(1, 1, 0));
+    std::vector<std::vector<float>> matrix = {
+        {-0.50709, 0.50709, 0.67612, -2.36643},
+        {0.76772, 0.60609, 0.12122, -2.82843},
+        {-0.35857, 0.59761, -0.71714, 0.00000},
+        {0.00000, 0.00000, 0.00000, 1.00000}
+    };
+    EXPECT_EQ(t, rt::Matrix(matrix));
+}
+

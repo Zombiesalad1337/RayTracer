@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "tuple.h"
+#include "vec.h"
 
 
 namespace rt{
@@ -37,7 +38,8 @@ public:
     static Matrix rotationY(float theta);
     static Matrix rotationZ(float theta);
     static Matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
-
+    
+    static Matrix viewTransform(const Vec& from, const Vec& to, const Vec& up);
 
     static Matrix identity();
     

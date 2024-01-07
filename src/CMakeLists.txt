@@ -18,6 +18,7 @@ add_executable(main main.cpp)
 
 target_link_libraries(vec tuple)
 target_link_libraries(point tuple)
+target_link_libraries(matrix vec)
 target_link_libraries(color vec point)
 target_link_libraries(canvas color)
 target_link_libraries(shape material)

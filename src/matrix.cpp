@@ -351,6 +351,17 @@ Matrix Matrix::shearing(float xy, float xz, float yx, float yz, float zx, float 
         
 }
 
+Matrix Matrix::viewTransform(const Vec& from, const Vec& to, const Vec& up){
+    Vec forward = Vec(to - from).norm();
+    Vec left = Vec::cross(forward, up.norm());
+    Vec trueUp = Vec::cross(left, forward);
+    std::vector<std::vector<float>> orientation = { {left.x, left.y, left.z, 0},
+                                            {trueUp.x, trueUp.y, trueUp.z, 0},
+                                            {-forward.x, -forward.y, -forward.z, 0},
+                                            {0, 0, 0, 1}, };
+    return Matrix(orientation) * translation(-from.x, -from.y, -from.z); 
+}
+
 Matrix Matrix::identity(){
     std::vector<std::vector<float>> vec = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}; 
         return Matrix(vec);
