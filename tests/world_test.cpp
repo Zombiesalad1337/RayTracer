@@ -53,7 +53,24 @@ TEST(World, shadeHit){
     rt::Intersection i(4, shape);
     rt::Computation comp(i, r);
     rt::Color shadeHit = w.shadeHit(comp);
+    std::cout << shadeHit.r() << " " << shadeHit.g() << " " << shadeHit.b() << std::endl;
     EXPECT_EQ(shadeHit, rt::Color(0.38066, 0.47583, 0.2855));
+}
+TEST(World, shadeHitShadow){
+    rt::World w;
+    w.addLight(rt::PointLight(rt::Point(0, 0, -10), rt::Color(1, 1, 1)));
+    rt::Sphere sp1;
+    w.addShape(&sp1);
+    rt::Sphere sp2;
+    const rt::Shape& s2 = sp2;
+    sp2.setTransform(rt::Matrix::translation(0, 0, 10));
+    w.addShape(&sp2);
+    rt::Ray r(rt::Point(0, 0, 5), rt::Vec(0, 0, 1));
+    
+    rt::Intersection i(4, &s2);
+    rt::Computation comp(i, r);
+    rt::Color shadeHit = w.shadeHit(comp);
+    EXPECT_EQ(shadeHit, rt::Color(0.1, 0.1, 0.1));
 }
 
 TEST(World, colorAtNoHit){

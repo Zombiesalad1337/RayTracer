@@ -1,0 +1,25 @@
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/24 of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/32 of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/16@2x of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/22@2x of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/24@2x of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/32@2x of theme Dracula has no size field
+
+
+(okular:42535): Gtk-WARNING **: 00:41:06.486: Theme directory actions/symbolic of theme Dracula has no size field
+
+[010 00:41:06.753200] Ignoring unknown config key: j
+[010 00:41:06.758855] Ignoring invalid config line: wintypes: { tooltip = { fade = false; shadow = true; opacity = 1.0; focus = true; full-shadow = false; }; dock = { shadow = false; } dnd = { shadow = false; } popup_menu = { opacity = 1.0; fade = false; } dropdown_menu = { opacity = 1.0; fade = false; } };
+Icon theme "breeze-dark" not found.
+Icon theme "breeze" not found.

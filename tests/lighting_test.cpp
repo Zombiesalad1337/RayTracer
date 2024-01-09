@@ -15,7 +15,7 @@ TEST(Lighting, Lighting1){
     rt::Vec eyev(0, 0, -1);
     rt::Vec normalv(0, 0, -1);
     rt::PointLight light(rt::Point(0, 0, -10), rt::Color(1, 1, 1));
-    rt::Color result = rt::lighting(m, light, position, eyev, normalv); 
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, false); 
     EXPECT_EQ(result, rt::Color(1.9, 1.9, 1.9));
     
 }
@@ -27,7 +27,7 @@ TEST(Lighting, Lighting2){
     rt::Vec eyev(0.0f, sqrtf(2)/2, -sqrtf(2)/2);
     rt::Vec normalv(0.0f, 0.0f, -1.0f);
     rt::PointLight light(rt::Point(0, 0, -10.0f), rt::Color(1.0f, 1.0f, 1.0f));
-    rt::Color result = rt::lighting(m, light, position, eyev, normalv); 
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, false); 
     EXPECT_EQ(result, rt::Color(1.0f, 1.0f, 1.0f));
 }
 
@@ -38,7 +38,7 @@ TEST(Lighting, Lighting3){
     rt::Vec eyev(0.0f, 0, -1);
     rt::Vec normalv(0.0f, 0.0f, -1.0f);
     rt::PointLight light(rt::Point(0, 10, -10.0f), rt::Color(1.0f, 1.0f, 1.0f));
-    rt::Color result = rt::lighting(m, light, position, eyev, normalv); 
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, false); 
     EXPECT_EQ(result, rt::Color(0.7364, 0.7364, 0.7364));
 }
 
@@ -49,7 +49,7 @@ TEST(Lighting, Lighting4){
     rt::Vec eyev(0.0f, -sqrtf(2)/2, -sqrtf(2)/2);
     rt::Vec normalv(0.0f, 0.0f, -1.0f);
     rt::PointLight light(rt::Point(0, 10, -10.0f), rt::Color(1.0f, 1.0f, 1.0f));
-    rt::Color result = rt::lighting(m, light, position, eyev, normalv); 
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, false); 
     std::cout << result.r() << " " << result.g() << " " << result.b() << std::endl;
     EXPECT_EQ(result, rt::Color(1.63639, 1.63639, 1.63639));
 }
@@ -61,6 +61,18 @@ TEST(Lighting, Lighting5){
     rt::Vec eyev(0.0f, 0, -1);
     rt::Vec normalv(0.0f, 0.0f, -1.0f);
     rt::PointLight light(rt::Point(0, 0, 10.0f), rt::Color(1.0f, 1.0f, 1.0f));
-    rt::Color result = rt::lighting(m, light, position, eyev, normalv); 
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, false); 
     EXPECT_EQ(result, rt::Color(0.1f, 0.1f, 0.1f));
 }
+
+TEST(Lighting, LightingInShadow){
+    rt::Material m;
+    rt::Point position(0, 0, 0);
+
+    rt::Vec eyev(0.0f, 0, -1);
+    rt::Vec normalv(0.0f, 0.0f, -1.0f);
+    rt::PointLight light(rt::Point(0, 0, -10.0f), rt::Color(1.0f, 1.0f, 1.0f));
+    rt::Color result = rt::lighting(m, light, position, eyev, normalv, true); 
+    EXPECT_EQ(result, rt::Color(0.1f, 0.1f, 0.1f));
+}
+

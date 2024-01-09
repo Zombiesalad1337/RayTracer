@@ -14,6 +14,7 @@ public:
     Vec eyev;
     Vec normalv;
     bool inside;
+    Point overPoint;
 
 };
 

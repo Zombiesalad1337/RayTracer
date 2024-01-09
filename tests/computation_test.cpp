@@ -42,3 +42,17 @@ TEST(Computation, HitInside){
     EXPECT_TRUE(comp.inside);
 
 }
+
+TEST(Computation, overPoint){
+    Ray r(Point(0, 0, -5), Vec(0, 0, 1));
+    Sphere sp;
+    const Shape& s = sp;
+    sp.setTransform(rt::Matrix::translation(0, 0, 1));
+    Intersection i(5, &s);
+
+    Computation comp(i, r);
+
+    EXPECT_LT(comp.overPoint.z, -EPSILON / 2);
+    EXPECT_GT(comp.point.z, comp.overPoint.z);
+
+}

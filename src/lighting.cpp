@@ -3,11 +3,13 @@
 
 namespace rt{
 
-Color lighting(const Material& material, const PointLight& light, Point point, Vec eyev, Vec normalv){
+Color lighting(const Material& material, const PointLight& light, Point point, Vec eyev, Vec normalv, bool inShadow){
     Color effectiveColor = material.color() * light.intensity();
     Vec lightv = Vec(light.position() - point).norm();
     
     Color ambient = effectiveColor * material.ambient();
+    if (inShadow)
+        return ambient;
     Color specular, diffuse;
 
     float lightDotNormal = Vec::dot(lightv, normalv);

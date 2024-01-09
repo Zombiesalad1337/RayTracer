@@ -24,6 +24,7 @@ public:
     Color shadeHit(const Computation&  comp) const;
     Color colorAt(const Ray& ray) const;
     Canvas render(const Camera& camera);
+    bool isShadowed(const PointLight& light, const Point& point) const;
 
 
     static World defaultWorld();

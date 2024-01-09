@@ -5,10 +5,10 @@ namespace rt{
 
 World::~World(){
     //TODO: FIX, CRASHES HERE, SEQFAULT
-    for(auto& shape: mShapes){
-        delete shape;
-    }
-    mShapes.clear();
+    // for(auto& shape: mShapes){
+    //     delete shape;
+    // }
+    // mShapes.clear();
 }
 
 void World::addShape(Shape* shape){
@@ -62,8 +62,11 @@ std::optional<std::vector<Intersection>> World::intersect(const Ray& ray) const{
 
 Color World::shadeHit(const Computation&  comp) const{
     Color finalColor;
+    //TODO: handle shadows in this case
+    //TODO: rethink for multiple light sources. Count number of shadows then divide ambient by it?
     for (const PointLight& light : mLights){
-        finalColor = finalColor +  lighting(comp.shape->material(), light, comp.point, comp.eyev, comp.normalv);
+        bool isShadow = isShadowed(light, comp.overPoint);
+        finalColor = finalColor +  lighting(comp.shape->material(), light, comp.overPoint, comp.eyev, comp.normalv, isShadow);
     }
     return finalColor;
 }
@@ -92,6 +95,24 @@ Canvas World::render(const Camera& camera){
         }
     }
     return image;
+}
+
+bool World::isShadowed(const PointLight& light, const Point& point) const{
+    Vec shadowVector = Vec(light.position() - point);
+    float distance = shadowVector.magnitude();
+    Vec direction = shadowVector.norm();
+
+    Ray shadowRay(point, direction);
+    std::optional<std::vector<Intersection>> intersections = intersect(shadowRay);
+
+    if (intersections.has_value()){
+        std::optional<Intersection> hit = Intersection::hit(intersections.value(), true);
+        if (hit.has_value() && hit.value().t < distance){
+            std::cout << "Shadow true" << std::endl;
+            return true;
+        }
+    }
+    return false;
 }
 
 }
