@@ -13,7 +13,7 @@ Computation::Computation(const Intersection& intersection, const Ray& ray) : t(i
     else{
         inside = false;
     }
-    overPoint = point + Point(normalv * EPSILON);
+    overPoint = point + Point(normalv * 0.01);
 }
 
 }

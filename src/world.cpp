@@ -108,7 +108,7 @@ bool World::isShadowed(const PointLight& light, const Point& point) const{
     if (intersections.has_value()){
         std::optional<Intersection> hit = Intersection::hit(intersections.value(), true);
         if (hit.has_value() && hit.value().t < distance){
-            std::cout << "Shadow true" << std::endl;
+            // std::cout << "Shadow true" << std::endl;
             return true;
         }
     }

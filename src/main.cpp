@@ -54,7 +54,7 @@ int main(){
     sphere2.setTransform(Matrix::translation(1.5, 0.5, -0.5) * Matrix::scaling(0.5, 0.5, 0.5));
     sphere3.setTransform(Matrix::translation(-1.5, 0.33, -0.75) * Matrix::scaling(0.33, 0.33, 0.33));
     int count = 0;
-    for (int left = -20; left <= 20; left += 2){
+    for (int left = -6; left <= 6; left += 2){
         std::cout << left << std::endl;
         World w;
         w.addShape(&floor);
@@ -65,12 +65,13 @@ int main(){
         w.addShape(&sphere3);
 
         w.addLight(PointLight(Point(left, 10, -10), Color(1, 1, 1)));
+        w.addLight(PointLight(Point(-left, 10, -10), Color(1, 1, 1)));
 
-        Camera c(640, 480, M_PI / 3);
+        Camera c(1920, 1080, M_PI / 3);
         c.setTransform(Matrix::viewTransform(Point(0, 1.5, -5), Point(0, 1, 0), Vec(0, 1, 0)));
         Canvas image = w.render(c);
 
-        image.writePPM("worldRenderTwo" + std::to_string(++count));
+        image.writePPM("worldRenderThree" + std::to_string(++count));
     }
 
     return 0;
