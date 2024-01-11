@@ -1,4 +1,5 @@
 #pragma once
+//TODO: remove sphere.h from here, move to .cpp
 #include "sphere.h"
 #include "point_light.h"
 #include "intersection.h"
