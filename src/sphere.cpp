@@ -4,7 +4,7 @@
 
 namespace rt{
 
-Sphere::Sphere() : Shape(SPHERE) {}
+Sphere::Sphere() : Shape() {}
 
 Vec Sphere::normalAt(const Point& worldPt) const {
     std::cout << "normalAt for sphere" << std::endl;
