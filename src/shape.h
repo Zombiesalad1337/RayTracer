@@ -4,8 +4,13 @@
 #include "vec.h"
 #include "point.h"
 #include "material.h"
+#include "ray.h"
+#include "intersection.h"
+#include <vector>
+#include <optional>
 
 namespace rt{
+
 
 class Shape{
 public:
@@ -22,6 +27,11 @@ public:
     void setMaterial(const Material& material);
     
     virtual Vec normalAt(const Point& worldPt) const = 0;
+
+    std::optional<std::vector<Intersection>> intersect(const Ray& ray, std::vector<Intersection>& intersections) const;
+
+    virtual std::optional<std::vector<Intersection>> localIntersect(const Ray& rayLocalSpace, std::vector<Intersection>& intersections) const  = 0;
+
 
 protected:
     Matrix mTransform = Matrix::identity();

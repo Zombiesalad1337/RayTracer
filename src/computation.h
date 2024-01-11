@@ -1,5 +1,6 @@
 #pragma once
-#include "intersection.h"
+#include "ray.h"
+#include "shape.h"
 
 namespace rt{
 

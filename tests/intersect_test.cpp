@@ -15,7 +15,7 @@ TEST(Intersection, raySphere2Pts){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs =  s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -33,7 +33,7 @@ TEST(Intersection, raySphereTangent){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -51,7 +51,7 @@ TEST(Intersection, raySphereMiss){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -69,7 +69,7 @@ TEST(Intersection, rayOriginatesInsideSphere){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -87,7 +87,7 @@ TEST(Intersection, rayOriginatesAfterSphere){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -117,7 +117,7 @@ TEST(Intersection, intersectSetsTheObject){
     const rt::Shape& s = sp;
     
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -255,7 +255,7 @@ TEST(Intersection, scaledSphere){
     s.setTransform(rt::Matrix::scaling(2, 2, 2));
 
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     int size = xs.has_value() ? xs.value().size() : 0;
 
@@ -275,7 +275,7 @@ TEST(Intersection, translatedSphere){
     s.setTransform(rt::Matrix::translation(5, 0, 0));
 
     std::vector<rt::Intersection> intersections;
-    std::optional<std::vector<rt::Intersection>> xs = rt::Intersection::intersect(s, r, intersections); 
+    std::optional<std::vector<rt::Intersection>> xs = s.intersect(r, intersections); 
     // std::cout << "has_value: " << xs.has_value() << std::endl;
     
     EXPECT_FALSE(xs.has_value());

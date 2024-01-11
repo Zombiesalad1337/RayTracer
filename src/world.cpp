@@ -49,7 +49,7 @@ World World::defaultWorld(){
 std::optional<std::vector<Intersection>> World::intersect(const Ray& ray) const{
     std::vector<Intersection> intersections;
     for (Shape* shape : mShapes){
-        Intersection::intersect(*shape, ray, intersections);
+        shape->intersect(ray, intersections);
     }
     if (intersections.size()){
         std::sort(intersections.begin(), intersections.end(), [](const Intersection& a, const Intersection& b){

@@ -16,4 +16,9 @@ void Shape::setTransform(const Matrix& mat) { mTransform = mat; }
 Material Shape::material() const { return mMaterial; }
 void Shape::setMaterial(const Material& material) { mMaterial = material; }
 
+std::optional<std::vector<Intersection>> Shape::intersect(const Ray& ray, std::vector<Intersection>& intersections) const{
+    Ray rayLocalSpace = ray.transform(getTransform().inverse());
+    return localIntersect(rayLocalSpace, intersections);
+}
+
 }
