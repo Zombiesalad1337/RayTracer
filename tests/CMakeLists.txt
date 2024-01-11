@@ -17,6 +17,7 @@ add_executable(lighting_test_exec lighting_test.cpp)
 add_executable(world_test_exec world_test.cpp)
 add_executable(computation_test_exec computation_test.cpp)
 add_executable(camera_test_exec camera_test.cpp)
+add_executable(plane_test_exec plane_test.cpp)
 
 add_library(tuple_test tuple_test.cpp)
 add_library(vec_test vec_test.cpp)
@@ -33,6 +34,7 @@ add_library(lighting_test lighting_test.cpp)
 add_library(world_test world_test.cpp)
 add_library(computation_test computation_test.cpp)
 add_library(camera_test camera_test.cpp)
+add_library(plane_test plane_test.cpp)
 
 target_include_directories(tuple_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(vec_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
@@ -49,6 +51,7 @@ target_include_directories(lighting_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(world_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(computation_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_include_directories(camera_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(plane_test_exec PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 
 target_link_libraries(tuple_test_exec
@@ -126,6 +129,18 @@ target_link_libraries(shape_test_exec
 )
 target_link_libraries(sphere_test_exec
                         sphere
+                        shape
+                        ray
+                        matrix
+                        canvas
+                        color
+                        tuple
+                        vec
+                        point
+                        gtest gtest_main
+)
+target_link_libraries(plane_test_exec
+                        plane 
                         shape
                         ray
                         matrix
@@ -284,4 +299,8 @@ add_test(
 add_test(
     NAME camera_test_exec
     COMMAND ${EXECUTABLE_OUTPUT_PATH}/camera_test_exec
+    )
+add_test(
+    NAME plane_test_exec
+    COMMAND ${EXECUTABLE_OUTPUT_PATH}/plane_test_exec
     )
