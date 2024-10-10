@@ -5,7 +5,7 @@ RESET=$(tput sgr0)
 
 CURR_DIR=$(pwd)
 
-CMAKE_DIR="/home/zombiesalad/Desktop/code/TheRayTracerChallenge"
+CMAKE_DIR="/mnt/d/notes2/sk/RayTracer"
 cd "${CMAKE_DIR}/build/"
 
 if [ $? -ne 0 ]; then
