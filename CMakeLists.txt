@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(RayTracerChallenge)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12 -L /usr/lib/gcc/x86_64-linux-gnu/12 -Wall -Wextra -lstdc++fs -std=c++17 -g -O0")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -13,6 +14,13 @@ message(STATUS "PROJECT SOURCE DIR : ${PROJECT_SOURCE_DIR}")
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+FetchContent_MakeAvailable(googletest)
 
 
 include(CTest)

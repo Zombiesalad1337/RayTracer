@@ -1,4 +1,3 @@
-add_subdirectory(/usr/src/gtest/ ${EXECUTABLE_OUTPUT_PATH}/gtest)
 
 set(TEST_BINARY ${PROJECT_NAME}_test)
 
@@ -58,13 +57,13 @@ target_link_libraries(tuple_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 
 target_link_libraries(vec_test_exec tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 
 target_link_libraries(color_test_exec
@@ -72,7 +71,7 @@ target_link_libraries(color_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(canvas_test_exec
                         canvas
@@ -80,7 +79,7 @@ target_link_libraries(canvas_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(matrix_test_exec
                         matrix
@@ -89,7 +88,7 @@ target_link_libraries(matrix_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 
 target_link_libraries(ray_test_exec
@@ -100,7 +99,7 @@ target_link_libraries(ray_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(intersect_test_exec
                         intersection
@@ -113,7 +112,7 @@ target_link_libraries(intersect_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(shape_test_exec
                         sphere
@@ -125,7 +124,7 @@ target_link_libraries(shape_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(sphere_test_exec
                         sphere
@@ -137,7 +136,7 @@ target_link_libraries(sphere_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(plane_test_exec
                         plane 
@@ -149,7 +148,7 @@ target_link_libraries(plane_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 
 target_link_libraries(point_light_test_exec
@@ -163,7 +162,7 @@ target_link_libraries(point_light_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(material_test_exec
                         material
@@ -176,7 +175,7 @@ target_link_libraries(material_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(lighting_test_exec
                        lighting 
@@ -190,7 +189,7 @@ target_link_libraries(lighting_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(world_test_exec
                        world 
@@ -207,7 +206,7 @@ target_link_libraries(world_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(computation_test_exec
                        computation 
@@ -222,7 +221,7 @@ target_link_libraries(computation_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 target_link_libraries(camera_test_exec
                        camera 
@@ -237,7 +236,7 @@ target_link_libraries(camera_test_exec
                         tuple
                         vec
                         point
-                        gtest gtest_main
+                        GTest::gtest_main
 )
 add_test(
     NAME tuple_test_exec
