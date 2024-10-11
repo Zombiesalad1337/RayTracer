@@ -7,17 +7,17 @@ namespace rt {
 
 Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
-bool Tuple::isVec(){
+bool Tuple::isVec() const{
     return this->w == 0;
 }
 
-bool Tuple::isPoint(){
+bool Tuple::isPoint() const{
     return this->w == 1;
 }
 //abs(x1 - x2) < EPSILON not a function due to additional overhead.
 //TODO: make that inline
 //I guess inline is not possible because of inheritance, both point and vec can call equals
-bool Tuple::equals(const Tuple& tup){
+bool Tuple::equals(const Tuple& tup) const{
     return fabs(this->x - tup.x) < EPSILON 
         && fabs(this->y - tup.y) < EPSILON 
         && fabs(this->z - tup.z) < EPSILON 

@@ -14,11 +14,11 @@ public:
     Tuple(float x, float y, float z, float w);
     
 
-    bool isVec();
+    bool isVec() const;
 
-    bool isPoint();
+    bool isPoint() const;
     
-    bool equals(const Tuple& tup);
+    bool equals(const Tuple& tup) const;
 
     Tuple operator-() const;
 
