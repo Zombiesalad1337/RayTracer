@@ -1,6 +1,7 @@
 #pragma once
 
-#define EPSILON 0.00001F
+constexpr float EPSILON = 0.00001F;
+
 namespace rt{
 
 class Tuple{

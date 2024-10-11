@@ -25,8 +25,7 @@ bool Tuple::equals(const Tuple& tup) const{
 }
 
 Tuple Tuple::operator-() const{
-    Tuple negated = Tuple(-this->x, -this->y, -this->z, -this->w);
-    return negated;
+    return Tuple(-this->x, -this->y, -this->z, -this->w);
 }
 
 //TODO: No point of w here as no point in multiplying a point by a scalar
@@ -36,30 +35,26 @@ Tuple Tuple::operator-() const{
 //the type when multiplying, and we know that there's no sense in multiplying a point
 //by a scalar.
 Tuple Tuple::operator*(float m) const{
-    Tuple multiplied = Tuple(this->x * m, this->y * m, this->z * m, this->w * m);
-    return multiplied;
+    return Tuple(this->x * m, this->y * m, this->z * m, this->w * m);
 }
 
 //TODO: No point of w here as no point in dividing a point by a scalar
 Tuple Tuple::operator/(float d) const{
-    Tuple divided = Tuple(this->x / d, this->y / d, this->z / d, this->w / d);
-    return divided;
+    return Tuple(this->x / d, this->y / d, this->z / d, this->w / d);
 }
 
 Tuple Tuple::operator+(const Tuple& tup) const{
-    Tuple sum = Tuple(this->x + tup.x, 
+    return Tuple(this->x + tup.x, 
                       this->y + tup.y, 
                       this->z + tup.z, 
                       this->w + tup.w);
-    return sum;
 }
 
 Tuple Tuple::operator-(const Tuple& tup) const{
-    Tuple sum = Tuple(this->x - tup.x, 
+    return Tuple(this->x - tup.x, 
                       this->y - tup.y, 
                       this->z - tup.z, 
                       this->w - tup.w);
-    return sum;
 }
 bool Tuple::operator==(const Tuple& tup) const{
     return fabs(this->x - tup.x) < EPSILON 
