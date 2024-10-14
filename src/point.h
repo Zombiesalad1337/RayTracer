@@ -10,6 +10,8 @@ public:
     explicit Point(float x, float y, float z);
     Point(const Tuple& tup);
     Point(Tuple&& tup);
+    Point operator*(float) = delete;
+    Point operator/(float) = delete;
 };
 
 } //namespace rt
