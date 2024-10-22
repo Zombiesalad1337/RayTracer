@@ -4,8 +4,10 @@
 namespace rt{
 
 Vec::Vec(float x, float y, float z) : Tuple(x, y, z, 0.0f) {};
-//Vec::Vec(const Tuple& tup) : Tuple(tup) {};
-Vec::Vec(Tuple&& tup) : Tuple(tup) {};
+Vec::Vec(const Tuple& tup) : Tuple(tup) {};
+// std::move is needed because a named rvalue reference (like 'tup') is treated as an lvalue, 
+//requiring a cast to rvalue for the move constructor.
+Vec::Vec(Tuple&& tup) : Tuple(std::move(tup)) {};
 
 float Vec::magnitude() const{
     return sqrt(this->x * this->x + 
@@ -13,14 +15,14 @@ float Vec::magnitude() const{
                 this->z * this->z);
 }
 
-//TODO: Handle for Zero Vector (magnitude 0)
 Vec Vec::norm() const{
-    return *this / this->magnitude();  
+    float mag = this->magnitude();
+    if (std::fabs(mag - 0.0f) < EPSILON){
+        return Vec(0, 0, 0);
+    }
+    return *this / mag;
 }
 
-//TODO: w belongs in dot? no sense of w in dot
-//
-//TODO: can be a static func inside vec class
 float Vec::dot(const Vec& a, const Vec& b){
     return a.x * b.x +
            a.y * b.y +
