@@ -13,6 +13,7 @@ public:
     //for 0,0,0 color
     Color();
     Color(float r, float g, float b);
+    //need to explicitly state that color constructor can accept a tuple
     Color(Tuple&& tup);
     Color(const Color& c) = default;
     Color(Color&& c) = default;

@@ -13,7 +13,10 @@ public:
     float w;
 
     Tuple(float x, float y, float z, float w);
-    
+    Tuple(const Tuple& tup) = default;
+    Tuple(Tuple&& tup) = default;    
+    Tuple& operator=(const Tuple& tup) = default;
+    Tuple& operator=(Tuple&& tup) = default;
 
     bool isVec() const;
 
