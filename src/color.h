@@ -22,15 +22,9 @@ public:
 
     Color operator*(const Color& c) const;
 
-
-
     float r() const;
     float g() const;
     float b() const;
-
-
-
-
 
 };
 
