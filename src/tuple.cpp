@@ -47,6 +47,7 @@ Tuple Tuple::operator-(const Tuple& tup) const{
                       this->z - tup.z, 
                       this->w - tup.w);
 }
+
 bool Tuple::operator==(const Tuple& tup) const{
     return fabs(this->x - tup.x) < EPSILON 
         && fabs(this->y - tup.y) < EPSILON 
@@ -55,6 +56,7 @@ bool Tuple::operator==(const Tuple& tup) const{
 }
 
 bool Tuple::operator!=(const Tuple& tup) const{
+    //this is implicit, equivalent to !this->operator==(tup)
     return !operator==(tup);
 }
 

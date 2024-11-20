@@ -1,5 +1,6 @@
 #pragma once
 
+//TODO: move to utils and create inline function for float equals after review
 constexpr float EPSILON = 0.00001F;
 
 namespace rt{

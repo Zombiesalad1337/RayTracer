@@ -17,7 +17,7 @@ public:
     Color(Tuple&& tup);
     Color(const Color& c) = default;
     Color(Color&& c) = default;
-    Color& operator=(const Color& c);
+    Color& operator=(const Color& c) = default;
     Color& operator=(Color&& c) = default;
 
     Color operator*(const Color& c) const;
