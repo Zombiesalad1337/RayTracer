@@ -21,13 +21,11 @@ Vec::Vec(const Tuple& tup) : Tuple(tup) {};
 Vec::Vec(Tuple&& tup) : Tuple(std::move(tup)) {};
 
 float Vec::magnitude() const{
-    return sqrt(this->x * this->x + 
-                this->y * this->y + 
-                this->z * this->z);
+    return sqrt(x * x + y * y + z * z);
 }
 
 Vec Vec::norm() const{
-    float mag = this->magnitude();
+    float mag = magnitude();
     if (std::fabs(mag - 0.0f) < EPSILON){
         return Vec(0, 0, 0);
     }

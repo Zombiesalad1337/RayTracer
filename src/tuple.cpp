@@ -8,51 +8,51 @@ namespace rt {
 Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 bool Tuple::isVec() const{
-    return this->w == 0;
+    return w == 0;
 }
 
 bool Tuple::isPoint() const{
-    return this->w == 1;
+    return w == 1;
 }
 //TODO: move to utils.h as inline function
 bool Tuple::equals(const Tuple& tup) const{
-    return fabs(this->x - tup.x) < EPSILON 
-        && fabs(this->y - tup.y) < EPSILON 
-        && fabs(this->z - tup.z) < EPSILON 
-        && fabs(this->w - tup.w) < EPSILON;
+    return fabs(x - tup.x) < EPSILON 
+        && fabs(y - tup.y) < EPSILON 
+        && fabs(z - tup.z) < EPSILON 
+        && fabs(w - tup.w) < EPSILON;
 }
 
 Tuple Tuple::operator-() const{
-    return Tuple(-this->x, -this->y, -this->z, -this->w);
+    return Tuple(-x, -y, -z, -w);
 }
 
 Tuple Tuple::operator*(float m) const{
-    return Tuple(this->x * m, this->y * m, this->z * m, this->w * m);
+    return Tuple(x * m, y * m, z * m, w * m);
 }
 
 Tuple Tuple::operator/(float d) const{
-    return Tuple(this->x / d, this->y / d, this->z / d, this->w / d);
+    return Tuple(x / d, y / d, z / d, w / d);
 }
 
 Tuple Tuple::operator+(const Tuple& tup) const{
-    return Tuple(this->x + tup.x, 
-                      this->y + tup.y, 
-                      this->z + tup.z, 
-                      this->w + tup.w);
+    return Tuple(x + tup.x, 
+                    y + tup.y, 
+                    z + tup.z, 
+                    w + tup.w);
 }
 
 Tuple Tuple::operator-(const Tuple& tup) const{
-    return Tuple(this->x - tup.x, 
-                      this->y - tup.y, 
-                      this->z - tup.z, 
-                      this->w - tup.w);
+    return Tuple(x - tup.x, 
+                    y - tup.y, 
+                    z - tup.z, 
+                    w - tup.w);
 }
 
 bool Tuple::operator==(const Tuple& tup) const{
-    return fabs(this->x - tup.x) < EPSILON 
-        && fabs(this->y - tup.y) < EPSILON 
-        && fabs(this->z - tup.z) < EPSILON 
-        && fabs(this->w - tup.w) < EPSILON;
+    return fabs(x - tup.x) < EPSILON 
+        && fabs(y - tup.y) < EPSILON 
+        && fabs(z - tup.z) < EPSILON 
+        && fabs(w - tup.w) < EPSILON;
 }
 
 bool Tuple::operator!=(const Tuple& tup) const{

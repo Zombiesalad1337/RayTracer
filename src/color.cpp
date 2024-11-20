@@ -14,11 +14,11 @@ Color::Color(Tuple&& tup) : Tuple(tup) {};
 
 //only specify override in class definition(header file)
 Color Color::operator*(const Color& c) const{
-    return Color(this->x * c.x, this->y * c.y, this->z * c.z);
+    return Color(x * c.x, y * c.y, z * c.z);
 }
-float Color::r() const{ return this->x; }
-float Color::g() const{ return this->y; }
-float Color::b() const{ return this->z; }
+float Color::r() const{ return x; }
+float Color::g() const{ return y; }
+float Color::b() const{ return z; }
 
 
 }//namespace rt
