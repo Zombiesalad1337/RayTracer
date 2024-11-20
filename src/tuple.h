@@ -13,7 +13,7 @@ public:
     float z;
     float w;
 
-    Tuple(float x, float y, float z, float w);
+    explicit Tuple(float x, float y, float z, float w);
     Tuple(const Tuple& tup) = default;
     Tuple(Tuple&& tup) = default;    
     Tuple& operator=(const Tuple& tup) = default;
