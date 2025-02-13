@@ -9,11 +9,11 @@
 
 TEST(Canvas, create){
     rt::Canvas c(10, 20);
-    EXPECT_EQ(c.width, 10);
-    EXPECT_EQ(c.height, 20);
+    EXPECT_EQ(c.getWidth(), 10);
+    EXPECT_EQ(c.getHeight(), 20);
     rt::Color black;
-    for (int i = 0; i < c.width; ++i){
-        for (int j = 0; j < c.height; ++j){
+    for (int i = 0; i < c.getWidth(); ++i){
+        for (int j = 0; j < c.getHeight(); ++j){
             EXPECT_EQ(c.getPixel(i, j), black);
         }
     }
@@ -29,9 +29,9 @@ TEST(Canvas, write){
 
 TEST(Canvas, writePPM){
     rt::Canvas c(1000,1000);
-    for (int i = 0; i < c.width; ++i){
-        for (int j = 0; j < c.height; ++j){
-            rt::Color col(((float)i+j) * 0.3/ (c.width+c.height-2), ((float)i+j) * 0.5 / (c.width+c.height-2), ((float)i+j) * 0.7 / (c.width+c.height-2));
+    for (int i = 0; i < c.getWidth(); ++i){
+        for (int j = 0; j < c.getHeight(); ++j){
+            rt::Color col(((float)i+j) * 0.3/ (c.getWidth()+c.getHeight()-2), ((float)i+j) * 0.5 / (c.getWidth()+c.getHeight()-2), ((float)i+j) * 0.7 / (c.getWidth()+c.getHeight()-2));
             c.setPixel(i, j, col);
         }
     }
@@ -40,9 +40,9 @@ TEST(Canvas, writePPM){
 
 TEST(Canvas, writePNG){
     rt::Canvas c(1000,1000);
-    for (int i = 0; i < c.width; ++i){
-        for (int j = 0; j < c.height; ++j){
-            rt::Color col(((float)i+j) * 0.7 / (c.width+c.height-2), ((float)i+j) * 0.3 / (c.width+c.height-2), ((float)i+j) * 0.4 / (c.width+c.height-2));
+    for (int i = 0; i < c.getWidth(); ++i){
+        for (int j = 0; j < c.getHeight(); ++j){
+            rt::Color col(((float)i+j) * 0.7 / (c.getWidth()+c.getHeight()-2), ((float)i+j) * 0.3 / (c.getWidth()+c.getHeight()-2), ((float)i+j) * 0.4 / (c.getWidth()+c.getHeight()-2));
             c.setPixel(i, j, col);
         }
     }
