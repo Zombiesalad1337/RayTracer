@@ -2,6 +2,8 @@
 
 A **Whitted-style Backward Ray Tracer** built from scratch in C++.
 
+![Render][renders/render1.gif]
+
 ## Running
 
 - Run `run.sh` to render the sample scene defined in `main.cpp`. Renders will be placed inside `build/` directory.

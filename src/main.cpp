@@ -7,24 +7,27 @@
 using namespace rt;
 
 int main() {
+
     Material matFloor;
-    matFloor.setColor(Color(1, 0.1, 0.1));
     matFloor.setSpecular(0);
 
     Material matSphere1;
-    matSphere1.setColor(Color(0.1, 1, 0.5));
     matSphere1.setSpecular(0.3);
     matSphere1.setDiffuse(0.7);
 
     Material matSphere2;
-    matSphere2.setColor(Color(0.5, 1, 0.1));
     matSphere2.setSpecular(0.3);
     matSphere2.setDiffuse(0.7);
 
     Material matSphere3;
-    matSphere3.setColor(Color(1, 0.8, 0.1));
     matSphere3.setSpecular(0.3);
     matSphere3.setDiffuse(0.7);
+
+    matFloor.setColor(Color(0.72, 0.52, 0.39));
+    matSphere1.setColor(Color(1.0, 0.82, 0.25));
+    matSphere2.setColor(Color(0.55, 0.60, 0.25));
+    matSphere3.setColor(Color(0.35, 0.70, 1.00));
+
 
     Plane floor;
     Sphere sphere1SP;
@@ -46,24 +49,28 @@ int main() {
     sphere3.setTransform(Matrix::translation(-1.5, 0.33, -0.75) *
                         Matrix::scaling(0.33, 0.33, 0.33));
     int count = 0;
-    for (int left = -20; left <= 20; left += 1) {
-        std::cout << left << std::endl;
-        World w;
-        w.addShape(&floor);
-        w.addShape(&sphere1);
-        w.addShape(&sphere2);
-        w.addShape(&sphere3);
+    for (int i = 0; i < 40; i++) {
+      double t = (2.0 * M_PI) * (double(i) / 40.0);
+      double x = 10.0 * std::cos(t);
+      double z = 10.0 * std::sin(t);
 
-        w.addLight(PointLight(Point(left, 10, -10), Color(1, 1, 1)));
-        w.addLight(PointLight(Point(left + 10, 10, -10), Color(1, 1, 1)));
+      World w;
+      w.addShape(&floor);
+      w.addShape(&sphere1);
+      w.addShape(&sphere2);
+      w.addShape(&sphere3);
 
-        Camera c(1280, 720, M_PI / 3);
-        c.setTransform(
-            Matrix::viewTransform(Point(0, 1.5, -5), Point(0, 1, 0), Vec(0, 1, 0)));
-        Canvas image = w.render(c);
+      w.addLight(PointLight(Point(x, 10, z), Color(1, 1, 1)));
 
-        image.writePPM("worldRender" + std::to_string(++count));
-    }
+      Camera c(1280, 720, M_PI / 3);
+      c.setTransform(
+          Matrix::viewTransform(Point(0, 1.5, -5), Point(0, 1, 0), Vec(0, 1, 0)));
+      Canvas image = w.render(c);
+
+      image.writePPM("render" + std::to_string(++count));
+      std::cout << count << std::endl;
+}
+
 
     return 0;
 }
