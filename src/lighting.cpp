@@ -5,10 +5,10 @@ namespace rt{
 
 Color lighting(const Material& material, const PointLight& light, Point point, Vec eyev, Vec normalv, bool inShadow){
     Color ca(1, 1, 1);
-    Color cb(144.0f / 255, 238.0f / 255, 144.0f / 255);
-    Color matColor = ((int)(floorf(point.x) + floorf(point.y) + floorf(point.z))) % 2 ? ca : cb;
-    Color effectiveColor = matColor * light.intensity();
-    //checkboard pattern originates from here. Do a proper implementation.
+    // Color cb(144.0f / 255, 238.0f / 255, 144.0f / 255);
+    // Color matColor = ((int)(floorf(point.x) + floorf(point.y) + floorf(point.z))) % 2 ? ca : cb;
+    // Color effectiveColor = matColor * light.intensity();
+    Color effectiveColor = material.color() * light.intensity();
     Vec lightv = Vec(light.position() - point).norm();
     
     Color ambient = effectiveColor * material.ambient();
