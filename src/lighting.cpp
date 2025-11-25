@@ -8,6 +8,7 @@ Color lighting(const Material& material, const PointLight& light, Point point, V
     Color cb(144.0f / 255, 238.0f / 255, 144.0f / 255);
     Color matColor = ((int)(floorf(point.x) + floorf(point.y) + floorf(point.z))) % 2 ? ca : cb;
     Color effectiveColor = matColor * light.intensity();
+    //checkboard pattern originates from here. Do a proper implementation.
     Vec lightv = Vec(light.position() - point).norm();
     
     Color ambient = effectiveColor * material.ambient();
