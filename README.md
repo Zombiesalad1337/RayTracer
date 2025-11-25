@@ -2,7 +2,7 @@
 
 A **Whitted-style Backward Ray Tracer** built from scratch in C++.
 
-![Render][renders/render1.gif]
+![Render](renders/render1.gif)
 
 ## Running
 
